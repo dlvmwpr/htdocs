@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <title>php</title>
     <style>
-        .gugudan { background:lime;}
-        .odddan { background: white;}
+        .gugudan { background:lime; color:green;}
+        .odddan { background: white; color:brown;}
     </style>
 </head>
 <body>
