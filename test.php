@@ -76,5 +76,12 @@
             }
             ?>
         </div>
+        <?php
+        $a=array('월','화','수','목','금','토','일');
+        foreach($a as $key){
+            print $key;
+            print "<br>";
+        }
+        ?>
     </body>
 </html>
