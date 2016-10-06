@@ -56,5 +56,6 @@ a{text-decoration:none; border:1px solid #acacac; color: black;}
 .footer_p>h5{margin-top:15px;}
 .footer_p>h5:nth-child(3){margin-top:-2px;}
 .W{color:#ededed}
-#postcode { margin-left: -39px; }
-#workPostcode { margin-left: -39px; }
+.postcode { width:60px; margin-left:-37px; }
+
+

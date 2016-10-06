@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="css/kcc.css">
     <meta charset="UTF-8">
-    <title>KCC</title>
+    <title>20522 최지혁</title>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script>
         function execDaumPostcode() {
@@ -142,7 +142,7 @@
             <div id="in">
                 <h5><span id="s">상세정보 입력</span> &nbsp;<span class="star">*</span>표시는 필수입력 항목입니다.</h5>
             </div>
-            <form action='kcc_join.php' method='post'>
+            <form action='kcc_join.php' method='post' name='frmJoin'>
                 <div id="put">
                 <table class="table">
                     <tr>
@@ -196,19 +196,19 @@
                     </tr>
                     <tr>
                         <td id="call">전화번호</td>
-                        <td><select name="phone">
+                        <td><select name="phoneGroup">
                             <option value="02">02</option>
                             <option value="031">031</option>
                             <option value="032">032</option>
                             <option value="033">033</option>
                         </select>&nbsp;-</td>
-                        <td><input type="text" style="width:60px;">&nbsp;-</td>
-                        <td><input type="text" style="width:60px;"></td>
+                        <td><input type="text" name="phoneSecond" style="width:60px;">&nbsp;-</td>
+                        <td><input type="text" name="phoneThird" style="width:60px;"></td>
                         <td><span class="ex">&nbsp; 예약시 휴대폰으로 문자가 발송됩니다.</span></td>
                     </tr>
                     <tr>
                         <td id="cellphone">휴대폰번호&nbsp;<span class="star">*</span></td>
-                         <td><select name="cellphone">
+                         <td><select name="cellphoneGroup">
                             <option value="010">010</option>
                             <option value="011">011</option>
                             <option value="016">016</option>
@@ -216,14 +216,14 @@
                             <option value="018">018</option>
                             <option value="019">019</option>
                         </select>&nbsp;-</td>
-                        <td><input type="text" style="width:60px;">&nbsp;-</td>
-                        <td><input type="text" style="width:60px;"></td>
+                        <td><input type="text" name="cellphoneSecond" style="width:60px;">&nbsp;-</td>
+                        <td><input type="text" name="cellphoneThird" style="width:60px;"></td>
                     </tr>
                     <tr>
                         <td id="sms">SMS 수신여부&nbsp;<span class="star">*</span></td>
-                        <td><input type="radio"><span class="ex">&nbsp;예</span></td>
-                        <td><input type="radio"><span class="ex">&nbsp;아니오</td>
-                        <td><span class="ex">회원공지 알림에 대한 수신여부입니다.<span></td>
+                        <td><input name="sms" type="radio"><span class="ex">&nbsp;예</span></td>
+                        <td><input name="sms" type="radio"><span class="ex">&nbsp;아니오</span></td>
+                        <td><span class="ex">회원공지 알림에 대한 수신여부입니다.</span></td>
                     </tr>
                     <tr>
                     <td>E-MAIL</td>
@@ -231,19 +231,19 @@
                     </tr>            
                     <tr>
                         <td id="post">자택 우편번호&nbsp;<span class="star">*</span></td>
-                        <td><input type="text" disabled="true" id="postcode" placeholder="우편번호">
+                        <td><input type="text" readonly id="postcode" name="postcode" class="postcode" placeholder="우편번호">
                         <td><input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"></td>
                     </tr>
                     <tr>
                         <td>자택주소&nbsp;<span class="star">*</span></td>
-                        <td><input type="text" id="address" disabled="true" placeholder="주소" style= "width:300px;"></td>
-                        <td><br/><input type="text" id="address2" placeholder="상세주소" style="width:300px;margin-left:128px;"></td>
+                        <td><input type="text" id="address" name="address" readonly placeholder="주소" style= "width:300px;"></td>
+                        <td><br/><input type="text" id="address2" name="address2" placeholder="상세주소" style="width:300px;margin-left:128px;"></td>
                     </tr>
                     <tr>
                         <td>DM발송처<span class="star">*</span></td>
-                        <td><input type="radio"></td>
+                        <td><input name="dm" type="radio"></td>
                         <td><span class="ex">자택</span></td>
-                        <td><input type="radio"></td>
+                        <td><input name="dm" type="radio"></td>
                         <td><span class="ex">직장</span></td>
                     </tr>
                 </table>
@@ -253,74 +253,74 @@
                     <table class="table2">
                         <tr>
                             <td>직장명&nbsp;<span class="star">*</span></td>
-                            <td><input type="text" style="margin-left:14px;"></td>
+                            <td><input name="officeName" type="text" style="margin-left:14px;"></td>
                         </tr>
                         <tr>
                             <td>직종</td>
-                            <td><input type="text" style="margin-left:42px;"></td>
+                            <td><input name="jobFamily" type="text" style="margin-left:42px;"></td>
                         </tr>
                         <tr>
                             <td>직위&nbsp;<span class="star">*</span></td>
-                            <td><input type="text" style="margin-left:30px;"></td>
+                            <td><input type="text" name="jobPosition" style="margin-left:30px;"></td>
                         </tr>
                         <tr>
                             <td id="post">직장 우편번호&nbsp;<span class="star">*</span></td>
-                            <td><input type="text" id="workPostcode" disabled="true" placeholder="우편번호">
+                            <td><input type="text" id="workPostcode" name="workPostcode" class="postcode" readonly placeholder="우편번호">
                             <td><input type="button" onclick="execDaumPostcode_W()" value="우편번호 찾기"></td>
                         </tr>
                         <tr>
                             <td>직장주소&nbsp;<span class="star">*</span></td>
-                            <td><input type="text" id="workAddress" disabled="true" placeholder="주소" style= "width:300px;"></td>
-                            <td><br/><input type="text" id="workAddress2" placeholder="상세주소" style="width:300px;margin-left:128px;"></td>
+                            <td><input type="text" id="workAddress" name="workAddress" readonly placeholder="주소" style= "width:300px;"></td>
+                            <td><br/><input type="text" id="workAddress2" name="workAddress2" placeholder="상세주소" style="width:300px;margin-left:128px;"></td>
                         </tr>
                         <tr>
                             <td id="number">직장전화번호<span class="star">*</span></td>
-                            <td><select name="phone">
-                            <option value="1">010</option>
-                            <option value="2">011</option>
-                            <option value="3">016</option>
-                            <option value="4">017</option>
-                            <option value="5">018</option>
-                            <option value="6">019</option>
+                            <td><select name="o_phoneGroup">
+                            <option value="010">010</option>
+                            <option value="011">011</option>
+                            <option value="016">016</option>
+                            <option value="017">017</option>
+                            <option value="018">018</option>
+                            <option value="019">019</option>
                         </select>&nbsp;-</td>
-                        <td><input type="text" style="width:60px;">&nbsp;-</td>
-                        <td><input type="text" style="width:60px;"></td>
+                        <td><input type="text" name="o_phoneSecond" style="width:60px;">&nbsp;-</td>
+                        <td><input type="text" name="o_phoneThird" style="width:60px;"></td>
                         </tr>
                         <td id="fax">팩스번호</td>
-                            <td><select name="phone">
-                            <option value="1">010</option>
-                            <option value="2">011</option>
-                            <option value="3">016</option>
-                            <option value="4">017</option>
-                            <option value="5">018</option>
-                            <option value="6">019</option>
+                            <td><select name="faxGroup">
+                            <option value="010">010</option>
+                            <option value="011">011</option>
+                            <option value="016">016</option>
+                            <option value="017">017</option>
+                            <option value="018">018</option>
+                            <option value="019">019</option>
                         </select>&nbsp;-</td>
-                        <td><input type="text" style="width:60px;">&nbsp;-</td>
-                        <td><input type="text" style="width:60px;"></td>
+                        <td><input type="text" name="faxSecond" style="width:60px;">&nbsp;-</td>
+                        <td><input type="text" name="faxThird" style="width:60px;"></td>
                         <tr>
                             <td id="merry">결혼여부</td>
-                            <td><input type="radio"></td>
+                            <td><input name = "marry" value = 0 type="radio"></td>
                             <td><span class="ex">미혼</span></td>
-                            <td><input type="radio"></td>
+                            <td><input name = "marry" value = 1 type="radio"></td>
                             <td><span class="ex">기혼</span></td>
                         </tr>
                         <tr>
                             <td id="mdate">결혼기념일</td>
-                        <td><select name="year" id="year">
+                        <td><select name="marryYear" id="year">
                                 <?php 
                                     for ($i=1901; $i<=2016; $i++) {
                                         echo ("<option value=$i>$i</option>");
                                     }
                                 ?>
                         </select>&nbsp;년</td>
-                        <td><select name="mot" id="mot">
+                        <td><select name="marryMonth" id="mot">
                             <?php 
                                 for ($i=1; $i<=12; $i++) {
                                     echo ("<option value=$i>$i</option>");
                                 }
                             ?>
                         </select>&nbsp;월</td>
-                        <td><select name="day" id="day">
+                        <td><select name="marryDay" id="day">
                             <?php 
                                 for ($i=1; $i<=31; $i++) {
                                     echo ("<option value=$i>$i</option>");
@@ -334,7 +334,7 @@
                 <div id="line3"></div>
                 <div id="btn">
                    <a href="#" id="back">취소</a>
-                   <a href="#" id="next">다음</a>
+                   <input type="submit" id="next" value="다음">
                 </div>
             </form>
             </div>

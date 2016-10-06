@@ -1,8 +1,38 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+$korName = $_POST['korName'];
+$engName = $_POST['engName'];
+$birthYear = $_POST['birthYear'];
+$birthMonth = $_POST['birthMonth'];
+$birthDay = $_POST['birthDay'];
+$id = $_POST['id'];
+$password = $_POST['password'];
+$chkPassword = $_POST['chkPassword'];
+$phoneGroup = $_POST['phoneGroup'];
+$phoneSecond = $_POST['phoneSecond'];
+$phoneThird = $_POST['phoneThird'];
+$cellphoneGroup = $_POST['cellphoneGroup'];
+$cellphoneSecond = $_POST['cellphoneSecond'];
+$cellphoneThird = $_POST['cellphoneThird'];
+$sms = $_POST['sms'];
+$h_postcode = $_POST['postcode'];
+$h_address = $_POST['address'];
+$h_address2 = $_POST['address2'];
+$dm = $_POST['dm'];
+$o_Name = $_POST['officeName'];
+$o_jobFamily = $_POST['jobFamily'];
+$o_jobPosition = $_POST['jobPosition'];
+$o_postcode = $_POST['workPostcode'];
+$o_address = $_POST['workAddress'];
+$o_address2 = $_POST['workAddress2'];
+$o_phoneGroup = $_POST['o_phoneGroup'];
+$o_phoneSecond = $_POST['o_phoneSecond'];
+$o_phoneThird = $_POST['o_phoneThird'];
+$faxGroup = $_POST['faxGroup'];
+$faxSecond = $_POST['faxSecond'];
+$faxThird = $_POST['faxThird'];
+$marry = $_POST['marry'];
+$marryYear = $_POST['marryYear'];
+$marryMonth = $_POST['marryMonth'];
+$marryDay = $_POST['marryDay'];
+print $h_postcode . $h_address . $h_address2 ;
+?>
