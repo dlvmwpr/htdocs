@@ -7,10 +7,10 @@
 <link rel="stylesheet" type="text/css" href="css/kcc_style.css" />
 <script type="text/javascript" src="js/jquery/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<script src="js/jquery.selectric.min.js"></script>
+<link rel="stylesheet" id="theme" href="css/selectric.css" />
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<link rel="stylesheet" href="css/selectordie.css"/>
-<script src="js/selectordie.js"></script>
-    <script>
+    <script type="text/javascript">
         function execDaumPostcode() {
             new daum.Postcode({
                 oncomplete: function(data) {
@@ -231,7 +231,16 @@
 						        <tr>
 						            <th><span>생년월일</span><em>*</em></th>
 						            <td>
-						                
+                                        <select name="birthYear">
+                                           <?php 
+                                            for ($i=1901;$i<=2016;$i++) {
+                                                echo "<option value='$i'>$i</option>";
+                                            };
+                                           ?>
+                                            <pre><code class="language-javascript">$('select').selectric();</code>
+                                            </pre>
+                                           
+                                        </select>
                                         <span class="year_txt">년</span>
 						                <div class="sel_box">
 						                    <p>

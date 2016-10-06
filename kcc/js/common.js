@@ -1,15 +1,4 @@
 $(document).ready(function(){
-
-  //banner
-  $('.banner').flexslider({
-    animation: "slide",
-    controlNav: true,
-    directionNav: false,
-    slideshow: true,
-    slideshowSpeed: 3000,
-    animationLoop: true
-    });
-
   //site menu
   $('.site_menu_lst > li > a').on('mouseenter focus', function(){
     $('.site_sub_menu').css('display','block');
