@@ -85,6 +85,12 @@
                 }
             }).open();
         }
+        function validateFrm() {
+            if ($('#ko_name').val()==""||$('#birthYear').val()==""||$('#birthMonth').val()==""||$('#birthDay').val()==""||$('#userid').val()==""||$('#password').val()==""||$('#password_confirm').val()==""||$('#password_confirm').val()!==$('#password_confirm').val()||$('#cell_g').val()==""||$('#cell_m').val()==""||$('#cell_e').val()==""||$('#agreement').val()==""||$('#h_postcode').val()==""||$('#home_addr1').val()==""||$('#home_addr2').val()==""||$('#dm').val()==""||$('#office_name').val()==""||$('#position').val()==""||$('#o_postcode').val()==""||$('#office_addr1').val()==""||$('#office_addr2').val()=="") {
+                alert ("아래의 항목을 확인하여 주십시오. \n · 입력되지 않은 항목이 있습니다.\n · 아이디의 중복확인이 되어있지 않습니다.\n · 입력한 비밀번호와 비밀번호 확인이 일치하지 않습니다.\n위 항목을 모두 확인하신 후, 재시도 하여 주십시오.");
+                return 0;
+            }
+		}
     </script>   
 </head>
 <body>
@@ -215,7 +221,7 @@
 							<h3 class="article_tit">상세정보 입력</h3>
 							<p class="tip"><em>*</em>표시는 필수입력 항목입니다.</p>
 						</div>					
-						<form action="POST_sub3.php" method="post" name="formJoin">
+						<form action="POST_sub3.php" method="post" id="formJoin" name="formJoin">
 						<div class="enter_area">
 						    <fieldset>
 						        <table class="enter_form">
@@ -231,65 +237,33 @@
 						        <tr>
 						            <th><span>생년월일</span><em>*</em></th>
 						            <td>
-                                        <select name="birthYear">
-                                           <?php 
-                                            for ($i=1901;$i<=2016;$i++) {
-                                                echo "<option value='$i'>$i</option>";
-                                            };
-                                           ?>
-                                            <pre><code class="language-javascript">$('select').selectric();</code>
-                                            </pre>
-                                           
-                                        </select>
-                                        <span class="year_txt">년</span>
-						                <div class="sel_box">
-						                    <p>
-						                        <span class="sel_op">1</span>
-						                        <a href="#" class="btn_sel"><span class="sp_ly ly_off"></span></a>
-						                    </p>
-						                    <ul>
-						                        <li><a href="#">1</a></li>
-						                        <li><a href="#">2</a></li>
-						                        <li><a href="#">3</a></li>
-						                        <li><a href="#">4</a></li>
-						                        <li><a href="#">5</a></li>
-						                        <li><a href="#">6</a></li>
-						                        <li><a href="#">7</a></li>
-						                        <li><a href="#">8</a></li>
-						                        <li><a href="#">9</a></li>
-						                        <li><a href="#">10</a></li>
-						                        <li><a href="#">11</a></li>
-						                        <li><a href="#">12</a></li>
-						                    </ul>
-						                </div>
-						                <span class="year_txt">월</span>
-						                <div class="sel_box">
-						                    <p>
-						                        <span class="sel_op">1</span>
-						                        <a href="#" class="btn_sel"><span class="sp_ly ly_off"></span></a>
-						                    </p>
-						                    <ul>
-						                        <li><a href="#">1</a></li>
-						                        <li><a href="#">2</a></li>
-						                        <li><a href="#">3</a></li>
-						                        <li><a href="#">4</a></li>
-						                        <li><a href="#">5</a></li>
-						                        <li><a href="#">6</a></li>
-						                        <li><a href="#">7</a></li>
-						                        <li><a href="#">8</a></li>
-						                        <li><a href="#">9</a></li>
-						                        <li><a href="#">10</a></li>
-						                        <li><a href="#">11</a></li>
-						                        <li><a href="#">12</a></li>
-						                    </ul>
-						                </div>
-						                <span class="year_txt">일</span>
+                                        <div id="wrapDate">
+                                            <div class="date">
+                                                <select class='selectbox selYear' id="birthYear" name="birthYear">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                                <span class="year_txt">년</span>
+                                            <div class="date">
+                                                <select class='selectbox selMonth' id="birthMonth" name="birthMonth">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                            <span class="year_txt">월</span>
+                                            
+                                            <div class="date">
+                                                <select class='selectbox selDay' id="birthDay" name="birthDay">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                            <span class="year_txt">일</span>
+                                        </div>
 						            </td>
 						        </tr>	
 						        <tr>
 						            <th><label for="userid">아이디</label><em>*</em></th>
 						            <td>
-						                <input type="text" id="userid" class="inptxt">
+						                <input type="text" id="userid" name="userid" class="inptxt">
 						                <a href="#" class="btn_img btn_cnfrm"><span class="btn_img">중복확인</span></a>
 						                <span class="tip2">사이트내에서 표시되는 본인정보이며 저장 후 수정하실 수 없습니다.</span>
 						            </td>
@@ -297,57 +271,74 @@
 						        <tr>
 						            <th><label for="password">비밀번호</label><em>*</em></th>
 						            <td>
-						                <input type="password" id="password" class="inptxt">
+						                <input type="password" id="password" name="password" class="inptxt">
 						                <span class="tip2">영문 소문자, 숫자 포함 4자리 이상 10자리 이하입니다.</span>
 						            </td>
 						        </tr>
 						        <tr>
 						            <th><label for="password_confirm">비밀번호 확인</label><em>*</em></th>
 						            <td>
-						                <input type="password" id="password_confirm" class="inptxt">
+						                <input type="password" id="password_confirm" name="confirm_password" class="inptxt">
 						                <span class="tip2">비밀번호를 한번 더 입력하세요.</span>
 						            </td>
 						        </tr>
 						        <tr>
 						            <th><span>전화번호</span></th>
 						            <td>
-						                <div class="sel_box phone">
-						                    <p>
-						                        <span class="sel_op">010</span>
-						                        <a href="#" class="btn_sel"><span class="sp_ly ly_off"></span></a>
-						                    </p>
-						                    <ul>
-						                        <li><a href="#">010</a></li>
-						                        <li><a href="#">011</a></li>
-						                        <li><a href="#">016</a></li>
-						                        <li><a href="#">017</a></li>
-						                    </ul>
+						                <div class="wrapPhone">
+						                    <div id="tel_g">
+						                        <select class="tel" id="tel_g" name="tel_g">
+                                                    <option value=""></option>
+                                                    <option value="02">02</option>
+                                                    <option value="031">031</option>
+                                                    <option value="032">032</option>
+                                                    <option value="033">033</option>
+                                                    <option value="041">041</option>
+                                                    <option value="042">042</option>
+                                                    <option value="043">043</option>
+                                                    <option value="044">044</option>
+                                                    <option value="051">051</option>
+                                                    <option value="052">052</option>
+                                                    <option value="053">053</option>
+                                                    <option value="054">054</option>
+                                                    <option value="055">055</option>
+                                                    <option value="061">061</option>
+                                                    <option value="062">062</option>
+                                                    <option value="063">063</option>
+                                                    <option value="064">064</option>
+                                                </select>
+						                    </div>
+						                    <div id="tel_me">
+						                        <span class="hyphen">-</span>
+						                        <input type="text" id="tel_m" name="tel_m" title="전화번호 중간 번호 입력" class="inptxt w41">		
+						                        <span class="hyphen">-</span>
+						                        <input type="text" id="tel_e" id="tel_e" title="전화번호 마지막 번호 입력" class="inptxt w41">
+						                    </div>
 						                </div>
-						                <span class="hyphen">-</span>
-						                <input type="text" id="tel_m" title="전화번호 중간 번호 입력" class="inptxt w41">		
-						                <span class="hyphen">-</span>
-						                <input type="text" id="tel_e" title="전화번호 마지막 번호 입력" class="inptxt w41">
 						            </td>
 						        </tr>
 						        <tr>
 						            <th><span>휴대폰번호</span><em>*</em></th>
 						            <td>
-						                <div class="sel_box phone">
-						                    <p>
-						                        <span class="sel_op">010</span>
-						                        <a href="#" class="btn_sel"><span class="sp_ly ly_off"></span></a>
-						                    </p>
-						                    <ul>
-						                        <li><a href="#">010</a></li>
-						                        <li><a href="#">011</a></li>
-						                        <li><a href="#">016</a></li>
-						                        <li><a href="#">017</a></li>
-						                    </ul>
+						                <div class="wrapPhone">
+						                    <div id="cell_g">
+						                        <select class="cell" name="cell_g">
+                                                    <option value=""></option>
+                                                    <option value="10">010</option>
+                                                    <option value="11">011</option>
+                                                    <option value="16">016</option>
+                                                    <option value="17">017</option>
+                                                    <option value="18">018</option>
+                                                    <option value="19">019</option>
+                                                </select>
+						                    </div>
+						                    <div id="cell_me">
+						                        <span class="hyphen">-</span>
+						                        <input type="text" id="cell_m" name="cell_m" title="핸드폰 번호 중간 번호 입력" class="inptxt w41">		
+						                        <span class="hyphen">-</span>
+						                        <input type="text" id="cell_e" name="cell_e" title="핸드폰 번호 마지막 번호 입력" class="inptxt w41">
+						                    </div>
 						                </div>
-						                <span class="hyphen">-</span>
-						                <input type="text" id="mobile_m" title="휴대폰 중간 번호 입력" class="inptxt w41">		
-						                <span class="hyphen">-</span>
-						                <input type="text" id="mobile_e" title="휴대폰 마지막 번호 입력" class="inptxt w41">
 						                <span class="tip2">예약시 휴대폰으로 문자가 발송됩니다.</span>
 						            </td>
 						        </tr>				
@@ -372,21 +363,21 @@
 						        <tr>
 						            <th><label for="email">E-MAIL</label></th>
 						            <td>
-						                <input type="email" id="email" class="inptxt">
+						                <input type="email" id="email" name="email" class="inptxt">
 						            </td>
 						        </tr>
 						        <tr>
 						            <th><span>자택 우편번호</span><em>*</em></th>
 						            <td>
-						                <input type="text" id="h_postcode" readonly class="inptxt w40">
+						                <input type="text" id="h_postcode" name="h_postcode" readonly class="inptxt w40">
 						                <a href="#" onclick="execDaumPostcode()" class="btn_img btn_cnfrm"><span class="btn_img">우편번호 찾기</span></a>
 						            </td>
 						        </tr>
 						        <tr>
 						            <th><label for="home_addr1">자택주소</label><em>*</em></th>
 						            <td>
-						                <p><input type="text" id="home_addr1" readonly class="inptxt w416"></p>						
-						                <p><input type="text" id="home_addr2" title="자택 상세주소" class="inptxt w416 gap"></p>
+						                <p><input type="text" id="home_addr1" name="home_addr1" readonly class="inptxt w416"></p>						
+						                <p><input type="text" id="home_addr2" name="home_addr2" title="자택 상세주소" class="inptxt w416 gap"></p>
 						            </td>
 						        </tr>			
 						        <tr>
@@ -414,70 +405,98 @@
 						        <table class="enter_form">
 						        <tr>
 						            <th><label for="office_name">직장명</label><em>*</em></th>
-						            <td><input type="text" id="office_name" class="inptxt"></td>
+						            <td><input type="text" id="office_name" name="office_name" class="inptxt"></td>
 						        </tr>			
 						        <tr>
 						            <th><label for="job_category">직종</label></th>
-						            <td><input type="text" id="job_category" class="inptxt"></td>
+						            <td><input type="text" id="job_category" name="job_category" class="inptxt"></td>
 						        </tr>			
 						        <tr>
 						            <th><label for="position">직위</label><em>*</em></th>
-						            <td><input type="text" id="position" class="inptxt"></td>
+						            <td><input type="text" id="position" name="position" class="inptxt"></td>
 						        </tr>
 						        <tr>
 						            <th><span>직장 우편번호</span><em>*</em></th>
 						            <td>
-						                <input type="text" id="o_postcode" readonly class="inptxt w40">
+						                <input type="text" id="o_postcode" name="o_postcode" readonly class="inptxt w40">
 						                <a href="#" onclick="execDaumPostcode_W()" class="btn_img btn_cnfrm"><span class="btn_img">우편번호 찾기</span></a>
 						            </td>
 						        </tr>
 						        <tr>
 						            <th><label for="office_addr1">직장주소</label><em>*</em></th>
 						            <td>
-						                <p><input type="text" id="office_addr1" readonly class="inptxt w416"></p>						
-						                <p><input type="text" id="office_addr2" title="직장 상세주소" class="inptxt w416 gap"></p>
+						                <p><input type="text" id="office_addr1" name="office_addr1" readonly class="inptxt w416"></p>						
+						                <p><input type="text" id="office_addr2" name="office_addr2" title="직장 상세주소" class="inptxt w416 gap"></p>
 						            </td>
 						        </tr>
 						        <tr>
 						            <th><span>직장전화번호</span></th>
 						            <td>
-						                <div class="sel_box phone">
-						                    <p>
-						                        <span class="sel_op">010</span>
-						                        <a href="#" class="btn_sel"><span class="sp_ly ly_off"></span></a>
-						                    </p>
-						                    <ul>
-						                        <li><a href="#">010</a></li>
-						                        <li><a href="#">011</a></li>
-						                        <li><a href="#">016</a></li>
-						                        <li><a href="#">017</a></li>
-						                    </ul>
+						                <div class="wrapPhone">
+						                    <div id="office_g">
+						                        <select class="tel" name="office_g" id="office_g">
+                                                    <option value=""></option>
+                                                    <option value="02">02</option>
+                                                    <option value="031">031</option>
+                                                    <option value="032">032</option>
+                                                    <option value="033">033</option>
+                                                    <option value="041">041</option>
+                                                    <option value="042">042</option>
+                                                    <option value="043">043</option>
+                                                    <option value="044">044</option>
+                                                    <option value="051">051</option>
+                                                    <option value="052">052</option>
+                                                    <option value="053">053</option>
+                                                    <option value="054">054</option>
+                                                    <option value="055">055</option>
+                                                    <option value="061">061</option>
+                                                    <option value="062">062</option>
+                                                    <option value="063">063</option>
+                                                    <option value="064">064</option>
+                                                </select>
+						                    </div>
+						                    <div id="office_me">
+						                        <span class="hyphen">-</span>
+						                        <input type="text" id="office_m" name="office_m" title="직장 전화번호 중간 번호 입력" class="inptxt w41">		
+						                        <span class="hyphen">-</span>
+						                        <input type="text" id="office_e" name="office_e" title="직장 전화번호 마지막 번호 입력" class="inptxt w41">
+						                    </div>
 						                </div>
-						                <span class="hyphen">-</span>
-						                <input type="text" id="office_tel_m" title="직장전화 중간 번호 입력" class="inptxt w41">		
-						                <span class="hyphen">-</span>
-						                <input type="text" id="office_tel_e" title="직장전화 마지막 번호 입력" class="inptxt w41">
 						            </td>
 						        </tr>
 						        <tr>
 						            <th><span>팩스번호</span></th>
 						            <td>
-						                <div class="sel_box phone">
-						                    <p>
-						                        <span class="sel_op">010</span>
-						                        <a href="#" class="btn_sel"><span class="sp_ly ly_off"></span></a>
-						                    </p>
-						                    <ul>
-						                        <li><a href="#">010</a></li>
-						                        <li><a href="#">011</a></li>
-						                        <li><a href="#">016</a></li>
-						                        <li><a href="#">017</a></li>
-						                    </ul>
+						                <div class="wrapPhone">
+						                    <div id="fax_g">
+						                        <select class="tel" name="fax_g">
+                                                    <option value=""></option>
+                                                    <option value="02">02</option>
+                                                    <option value="031">031</option>
+                                                    <option value="032">032</option>
+                                                    <option value="033">033</option>
+                                                    <option value="041">041</option>
+                                                    <option value="042">042</option>
+                                                    <option value="043">043</option>
+                                                    <option value="044">044</option>
+                                                    <option value="051">051</option>
+                                                    <option value="052">052</option>
+                                                    <option value="053">053</option>
+                                                    <option value="054">054</option>
+                                                    <option value="055">055</option>
+                                                    <option value="061">061</option>
+                                                    <option value="062">062</option>
+                                                    <option value="063">063</option>
+                                                    <option value="064">064</option>
+                                                </select>
+						                    </div>
+						                    <div id="fax_me">
+						                        <span class="hyphen">-</span>
+						                        <input type="text" id="fax_m" title="직장 전화번호 중간 번호 입력" class="inptxt w41">		
+						                        <span class="hyphen">-</span>
+						                        <input type="text" id="fax_e" title="직장 전화번호 마지막 번호 입력" class="inptxt w41">
+						                    </div>
 						                </div>
-						                <span class="hyphen">-</span>
-						                <input type="text" id="fax_m" title="팩스 중간번호 입력" class="inptxt w41">
-						                <span class="hyphen">-</span>
-						                <input type="text" id="fax_e" title="팩스 마지막번호 입력" class="inptxt w41">
 						            </td>
 						        </tr>			
 						        <tr>
@@ -500,61 +519,27 @@
 						        <tr>
 						            <th><span>결혼기념일</span></th>
 						            <td>
-						                <div class="sel_box year">
-						                    <p>
-						                        <span class="sel_op">1984</span>
-						                        <a href="#" class="btn_sel"><span class="sp_ly ly_off"></span></a>
-						                    </p>
-						                    <ul>
-						                        <li><a href="#">1987</a></li>
-						                        <li><a href="#">1986</a></li>
-						                        <li><a href="#">1985</a></li>
-						                        <li><a href="#">1984</a></li>
-						                    </ul>
-						                </div>
-						                <span class="year_txt">년</span>
-						                <div class="sel_box">
-						                    <p>
-						                        <span class="sel_op">1</span>
-						                        <a href="#" class="btn_sel"><span class="sp_ly ly_off"></span></a>
-						                    </p>
-						                    <ul>
-						                        <li><a href="#">1</a></li>
-						                        <li><a href="#">2</a></li>
-						                        <li><a href="#">3</a></li>
-						                        <li><a href="#">4</a></li>
-						                        <li><a href="#">5</a></li>
-						                        <li><a href="#">6</a></li>
-						                        <li><a href="#">7</a></li>
-						                        <li><a href="#">8</a></li>
-						                        <li><a href="#">9</a></li>
-						                        <li><a href="#">10</a></li>
-						                        <li><a href="#">11</a></li>
-						                        <li><a href="#">12</a></li>
-						                    </ul>
-						                </div>
-						                <span class="year_txt">월</span>
-						                <div class="sel_box">
-						                    <p>
-						                        <span class="sel_op">1</span>
-						                        <a href="#" class="btn_sel"><span class="sp_ly ly_off"></span></a>
-						                    </p>
-						                    <ul>
-						                        <li><a href="#">1</a></li>
-						                        <li><a href="#">2</a></li>
-						                        <li><a href="#">3</a></li>
-						                        <li><a href="#">4</a></li>
-						                        <li><a href="#">5</a></li>
-						                        <li><a href="#">6</a></li>
-						                        <li><a href="#">7</a></li>
-						                        <li><a href="#">8</a></li>
-						                        <li><a href="#">9</a></li>
-						                        <li><a href="#">10</a></li>
-						                        <li><a href="#">11</a></li>
-						                        <li><a href="#">12</a></li>
-						                    </ul>
-						                </div>
-						                <span class="year_txt">일</span>
+						                <div id="wrapmDate">
+                                            <div class="date">
+                                                <select class='selectbox selYear' name="marryYear">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                                <span class="year_txt">년</span>
+                                            <div class="date">
+                                                <select class='selectbox selMonth' name="marryMonth">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                            <span class="year_txt">월</span>
+                                            
+                                            <div class="date">
+                                                <select class='selectbox selDay' name="marryDay">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                            <span class="year_txt">일</span>
+                                        </div>
 						            </td>
 						        </tr>										
 						        </table>
@@ -562,7 +547,7 @@
 						    </div>
                             <div class="btn_wrap">
                                 <a href="#" class="sp_sub btn_cancle">취소</a>
-                                <a href="#" class="sp_sub btn_next">다음</a>
+                                <a href="#" onclick="validateFrm()" class="sp_sub btn_next">다음</a>
                             </div>
                          </form>
                     </div>

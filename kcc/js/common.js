@@ -1,4 +1,20 @@
 $(document).ready(function(){
+    for (var i=1901;i<=2016;i++) {
+        var year;
+            year = "<option value="+i+">"+i+"</option>"
+        $(".selYear").append(year);
+    };
+    for (var i=1;i<=12;i++) {
+        var month;
+            month = "<option value="+i+">"+i+"</option>"
+        $(".selMonth").append(month);
+    };
+    for (var i=1;i<=31;i++) {
+        var day;
+            day = "<option value="+i+">"+i+"</option>"
+        $(".selDay").append(day);
+    };
+    $('select').selectric();
   //site menu
   $('.site_menu_lst > li > a').on('mouseenter focus', function(){
     $('.site_sub_menu').css('display','block');
