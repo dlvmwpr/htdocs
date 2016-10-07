@@ -9,6 +9,7 @@
 <script type="text/javascript" src="js/common.js"></script>
 <script src="js/jquery.selectric.min.js"></script>
 <link rel="stylesheet" id="theme" href="css/selectric.css" />
+<script src="js/validate.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script type="text/javascript">
         function execDaumPostcode() {
@@ -85,12 +86,24 @@
                 }
             }).open();
         }
-        function validateFrm() {
-            if ($('#ko_name').val()==""||$('#birthYear').val()==""||$('#birthMonth').val()==""||$('#birthDay').val()==""||$('#userid').val()==""||$('#password').val()==""||$('#password_confirm').val()==""||$('#password_confirm').val()!==$('#password_confirm').val()||$('#cell_g').val()==""||$('#cell_m').val()==""||$('#cell_e').val()==""||$('#agreement').val()==""||$('#h_postcode').val()==""||$('#home_addr1').val()==""||$('#home_addr2').val()==""||$('#dm').val()==""||$('#office_name').val()==""||$('#position').val()==""||$('#o_postcode').val()==""||$('#office_addr1').val()==""||$('#office_addr2').val()=="") {
-                alert ("아래의 항목을 확인하여 주십시오. \n · 입력되지 않은 항목이 있습니다.\n · 아이디의 중복확인이 되어있지 않습니다.\n · 입력한 비밀번호와 비밀번호 확인이 일치하지 않습니다.\n위 항목을 모두 확인하신 후, 재시도 하여 주십시오.");
-                return 0;
-            }
-		}
+        function IDcheck() {
+            $("#idVaild").removeClass('validHidden');
+            var id = $('#userid').val();
+            $.ajax({
+                type:"POST",
+                url:"vaildid.php",
+                id: id,
+                dataType:'html',
+                success: function(data) {
+                    if (data == "y") {
+                        $(".validHidden").text("사용할 수 있는 아이디입니다.");
+                    } else {
+                        $(".validHidden").text("사용할 수 없는 아이디입니다.");
+                    }
+                },
+                timeout:2000
+            });
+        }
     </script>   
 </head>
 <body>
@@ -221,7 +234,7 @@
 							<h3 class="article_tit">상세정보 입력</h3>
 							<p class="tip"><em>*</em>표시는 필수입력 항목입니다.</p>
 						</div>					
-						<form action="POST_sub3.php" method="post" id="formJoin" name="formJoin">
+						<form action="POST_sub3.php" method="post" id="frmJoin" name="frmJoin">
 						<div class="enter_area">
 						    <fieldset>
 						        <table class="enter_form">
@@ -263,11 +276,13 @@
 						        <tr>
 						            <th><label for="userid">아이디</label><em>*</em></th>
 						            <td>
-						                <input type="text" id="userid" name="userid" class="inptxt">
-						                <a href="#" class="btn_img btn_cnfrm"><span class="btn_img">중복확인</span></a>
+						                <input type="text" onkeyup="IDcheck()" id="userid" name="userid" class="inptxt">
+						                <a class="btn_img btn_cnfrm" onclick="IDcheck()"><span class="btn_img">중복확인</span></a>
 						                <span class="tip2">사이트내에서 표시되는 본인정보이며 저장 후 수정하실 수 없습니다.</span>
 						            </td>
 						        </tr>
+                                <!--class="vaildHidden"-->
+                                <tr class="vaildHidden" id="idVaild"><td></td><td>사용할 수 있는 아이디입니다.</td></tr>
 						        <tr>
 						            <th><label for="password">비밀번호</label><em>*</em></th>
 						            <td>
@@ -310,9 +325,9 @@
 						                    </div>
 						                    <div id="tel_me">
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="tel_m" name="tel_m" title="전화번호 중간 번호 입력" class="inptxt w41">		
+						                        <input type="text" id="tel_m" name="tel_m" maxlength="4" title="전화번호 중간 번호 입력" class="inptxt w41">		
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="tel_e" id="tel_e" title="전화번호 마지막 번호 입력" class="inptxt w41">
+						                        <input type="text" id="tel_e" id="tel_e" maxlength="4" title="전화번호 마지막 번호 입력" class="inptxt w41">
 						                    </div>
 						                </div>
 						            </td>
@@ -334,9 +349,9 @@
 						                    </div>
 						                    <div id="cell_me">
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="cell_m" name="cell_m" title="핸드폰 번호 중간 번호 입력" class="inptxt w41">		
+						                        <input type="text" id="cell_m" name="cell_m" maxlength="4" title="핸드폰 번호 중간 번호 입력" class="inptxt w41">		
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="cell_e" name="cell_e" title="핸드폰 번호 마지막 번호 입력" class="inptxt w41">
+						                        <input type="text" id="cell_e" name="cell_e" maxlength="4" title="핸드폰 번호 마지막 번호 입력" class="inptxt w41">
 						                    </div>
 						                </div>
 						                <span class="tip2">예약시 휴대폰으로 문자가 발송됩니다.</span>
@@ -370,7 +385,7 @@
 						            <th><span>자택 우편번호</span><em>*</em></th>
 						            <td>
 						                <input type="text" id="h_postcode" name="h_postcode" readonly class="inptxt w40">
-						                <a href="#" onclick="execDaumPostcode()" class="btn_img btn_cnfrm"><span class="btn_img">우편번호 찾기</span></a>
+						                <a onclick="execDaumPostcode()" class="btn_img btn_cnfrm"><span class="btn_img">우편번호 찾기</span></a>
 						            </td>
 						        </tr>
 						        <tr>
@@ -419,7 +434,7 @@
 						            <th><span>직장 우편번호</span><em>*</em></th>
 						            <td>
 						                <input type="text" id="o_postcode" name="o_postcode" readonly class="inptxt w40">
-						                <a href="#" onclick="execDaumPostcode_W()" class="btn_img btn_cnfrm"><span class="btn_img">우편번호 찾기</span></a>
+						                <a onclick="execDaumPostcode_W()" class="btn_img btn_cnfrm"><span class="btn_img">우편번호 찾기</span></a>
 						            </td>
 						        </tr>
 						        <tr>
@@ -457,9 +472,9 @@
 						                    </div>
 						                    <div id="office_me">
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="office_m" name="office_m" title="직장 전화번호 중간 번호 입력" class="inptxt w41">		
+						                        <input type="text" id="office_m" name="office_m" maxlength="4" title="직장 전화번호 중간 번호 입력" class="inptxt w41">		
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="office_e" name="office_e" title="직장 전화번호 마지막 번호 입력" class="inptxt w41">
+						                        <input type="text" id="office_e" name="office_e" maxlength="4" title="직장 전화번호 마지막 번호 입력" class="inptxt w41">
 						                    </div>
 						                </div>
 						            </td>
@@ -492,9 +507,9 @@
 						                    </div>
 						                    <div id="fax_me">
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="fax_m" title="직장 전화번호 중간 번호 입력" class="inptxt w41">		
+						                        <input type="text" name="fax_m" id="fax_m" maxlength="4" title="직장 전화번호 중간 번호 입력" class="inptxt w41">		
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="fax_e" title="직장 전화번호 마지막 번호 입력" class="inptxt w41">
+						                        <input type="text" name="fax_e" id="fax_e" maxlength="4" title="직장 전화번호 마지막 번호 입력" class="inptxt w41">
 						                    </div>
 						                </div>
 						            </td>
@@ -547,7 +562,7 @@
 						    </div>
                             <div class="btn_wrap">
                                 <a href="#" class="sp_sub btn_cancle">취소</a>
-                                <a href="#" onclick="validateFrm()" class="sp_sub btn_next">다음</a>
+                                <a onclick="$('form#frmJoin').submit();" class="sp_sub btn_next">다음</a>
                             </div>
                          </form>
                     </div>
