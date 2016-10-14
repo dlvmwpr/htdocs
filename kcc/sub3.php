@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
 <title>20522 최지혁</title>
@@ -86,26 +86,53 @@
                 }
             }).open();
         }
-        function IDcheck() {
-            $("#idVaild").removeClass('validHidden');
-            var id = $('#userid').val();
-            $.ajax({
-                type:"POST",
-                url:"vaildid.php",
-                id: id,
-                dataType:'html',
-                success: function(data) {
-                    if (data == "y") {
-                        $(".validHidden").text("사용할 수 있는 아이디입니다.");
+        function vaildID() {
+            var ID = $('#userid').val();
+            var pattern = /^\w{4,20}$/;
+            if (!pattern.test(ID, pattern)) {
+                vailded = false;
+                $("#idVaild").removeClass('vaildHidden');
+                $(".txtVaild").text("아이디는 영문대,소문자, 숫자, 언더바(_) 로 4~20자리로 입력해주세요.");
+                $(".txtVaild").css("color","#e60012");
+            } else {
+                request = $.ajax({
+                    type:"post",
+                    url:"vaildid.php",
+                    data : {'id': ID},
+                    dataType:'html',
+                    timeout:2000});
+                request.done(function (data) {
+                    $("#idVaild").removeClass('vaildHidden');
+                    if (data >= 1) {
+                        vailded = false;
+                        $(".txtVaild").text("이미 사용중인 아이디입니다.");
+                        $(".txtVaild").css("color","#e60012");
                     } else {
-                        $(".validHidden").text("사용할 수 없는 아이디입니다.");
+                        vailded = true;
+                        $(".txtVaild").text("사용 가능한 아이디입니다.");
+                        $(".txtVaild").css("color","#666");
                     }
-                },
-                timeout:2000
-            });
+                });
+            }
+        }
+        function vaildEmail() {
+            var email = $('#email').val();
+            var emailPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;  //이메일 정규식
+            $match = preg_match(emailPattern,email);
+        }
+        function validForm() {
+            
+            
+            if (vailded == true) {
+                alert ("보낸다");
+                return true;
+            } else {
+                alert ("실패");
+                return false;
+            }
         }
     </script>   
-</head>
+
 <body>
 <!-- skip nav -->
 <ul id="skip">
@@ -194,9 +221,7 @@
 		</div>
 	</div>
 	<!-- //header -->
-	
 	<hr>
-	
 	<!-- container -->
 	<div id="container">
 		<div id="content">
@@ -223,9 +248,9 @@
 						<h2 class="sp_sub join_title">회원가입</h2>
 						<p class="join_txt">다양한 서비스와 풍부한 컨텐츠를 만나실 수 있는 회원가입입니다.</p>
 						<ol class="join_step">
-						<li class="selected">약관동의</li>
+						<li>약관동의</li>
 						<li>본인인증<span class="sp_sub ico_arr"></span></li>
-						<li>회원정보입력<span class="sp_sub ico_arr"></span></li>
+						<li class="selected">회원정보입력<span class="sp_sub ico_arr"></span></li>
 						<li>가입완료<span class="sp_sub ico_arr"></span></li>
 						</ol>
 					</div>
@@ -234,55 +259,57 @@
 							<h3 class="article_tit">상세정보 입력</h3>
 							<p class="tip"><em>*</em>표시는 필수입력 항목입니다.</p>
 						</div>					
-						<form action="POST_sub3.php" method="post" id="frmJoin" name="frmJoin">
+                                            <form action="kcc_join.php" method="post" id="frmJoin" name="frmJoin" onsubmit="return validForm()">
 						<div class="enter_area">
 						    <fieldset>
 						        <table class="enter_form">
 						        <caption><span>회원정보 입력</span></caption>	
 						        <tr>
-						            <th><label for="ko_name">한글이름</label><em>*</em></th>
-						            <td><input type="text" id="ko_name" class="inptxt"></td>
+						            <th><span>한글이름</span><em>*</em></th>
+						            <td><input type="text" id="ko_name" name="korName" class="inptxt"></td>
 						        </tr>	
 						        <tr>
-						            <th><label for="eg_name">영문이름</label></th>
-						            <td><input type="text" id="eg_name" class="inptxt"></td>
+						            <th><span>영문이름</span></th>
+						            <td><input type="text" id="eg_name" name="engName" class="inptxt"></td>
 						        </tr>
 						        <tr>
 						            <th><span>생년월일</span><em>*</em></th>
 						            <td>
-                                        <div id="wrapDate">
-                                            <div class="date">
-                                                <select class='selectbox selYear' id="birthYear" name="birthYear">
-                                                    <option value=""></option>
-                                                </select>
-                                            </div>
-                                                <span class="year_txt">년</span>
-                                            <div class="date">
-                                                <select class='selectbox selMonth' id="birthMonth" name="birthMonth">
-                                                    <option value=""></option>
-                                                </select>
-                                            </div>
-                                            <span class="year_txt">월</span>
-                                            
-                                            <div class="date">
-                                                <select class='selectbox selDay' id="birthDay" name="birthDay">
-                                                    <option value=""></option>
-                                                </select>
-                                            </div>
-                                            <span class="year_txt">일</span>
-                                        </div>
+                                                                <div id="wrapDate">
+                                                                    <div class="date">
+                                                                        <select class='selectbox selYear' id="birthYear" name="birthYear">
+                                                                            <option value=""></option>
+                                                                        </select>
+                                                                    </div>
+                                                                        <span class="year_txt">년</span>
+                                                                    <div class="date">
+                                                                        <select class='selectbox selMonth' id="birthMonth" name="birthMonth">
+                                                                            <option value=""></option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <span class="year_txt">월</span>
+
+                                                                    <div class="date">
+                                                                        <select class='selectbox selDay' id="birthDay" name="birthDay">
+                                                                            <option value=""></option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <span class="year_txt">일</span>
+                                                                </div>
 						            </td>
 						        </tr>	
 						        <tr>
 						            <th><label for="userid">아이디</label><em>*</em></th>
 						            <td>
-						                <input type="text" onkeyup="IDcheck()" id="userid" name="userid" class="inptxt">
-						                <a class="btn_img btn_cnfrm" onclick="IDcheck()"><span class="btn_img">중복확인</span></a>
+						                <input type="text" onkeyup="vaildID()" id="userid" name="userid" class="inptxt">
+						                <a class="btn_img btn_cnfrm" onclick="vaildID()"><span class="btn_img">중복확인</span></a>
 						                <span class="tip2">사이트내에서 표시되는 본인정보이며 저장 후 수정하실 수 없습니다.</span>
 						            </td>
 						        </tr>
-                                <!--class="vaildHidden"-->
-                                <tr class="vaildHidden" id="idVaild"><td></td><td>사용할 수 있는 아이디입니다.</td></tr>
+                                                        <tr class="vaildHidden" id="idVaild">
+                                                            <td></td>
+                                                            <td><span class="txtVaild">사용할 수 있는 아이디입니다.</span></td>
+                                                        </tr>
 						        <tr>
 						            <th><label for="password">비밀번호</label><em>*</em></th>
 						            <td>
@@ -302,32 +329,32 @@
 						            <td>
 						                <div class="wrapPhone">
 						                    <div id="tel_g">
-						                        <select class="tel" id="tel_g" name="tel_g">
-                                                    <option value=""></option>
-                                                    <option value="02">02</option>
-                                                    <option value="031">031</option>
-                                                    <option value="032">032</option>
-                                                    <option value="033">033</option>
-                                                    <option value="041">041</option>
-                                                    <option value="042">042</option>
-                                                    <option value="043">043</option>
-                                                    <option value="044">044</option>
-                                                    <option value="051">051</option>
-                                                    <option value="052">052</option>
-                                                    <option value="053">053</option>
-                                                    <option value="054">054</option>
-                                                    <option value="055">055</option>
-                                                    <option value="061">061</option>
-                                                    <option value="062">062</option>
-                                                    <option value="063">063</option>
-                                                    <option value="064">064</option>
-                                                </select>
+						                        <select class="tel" id="tel_g" name="phoneGroup">
+                                                                            <option value=""></option>
+                                                                            <option value="02">02</option>
+                                                                            <option value="031">031</option>
+                                                                            <option value="032">032</option>
+                                                                            <option value="033">033</option>
+                                                                            <option value="041">041</option>
+                                                                            <option value="042">042</option>
+                                                                            <option value="043">043</option>
+                                                                            <option value="044">044</option>
+                                                                            <option value="051">051</option>
+                                                                            <option value="052">052</option>
+                                                                            <option value="053">053</option>
+                                                                            <option value="054">054</option>
+                                                                            <option value="055">055</option>
+                                                                            <option value="061">061</option>
+                                                                            <option value="062">062</option>
+                                                                            <option value="063">063</option>
+                                                                            <option value="064">064</option>
+                                                                        </select>
 						                    </div>
 						                    <div id="tel_me">
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="tel_m" name="tel_m" maxlength="4" title="전화번호 중간 번호 입력" class="inptxt w41">		
+						                        <input type="text" id="tel_m" name="phoneSecond" maxlength="4" title="전화번호 중간 번호 입력" class="inptxt w41">		
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="tel_e" id="tel_e" maxlength="4" title="전화번호 마지막 번호 입력" class="inptxt w41">
+						                        <input type="text" id="tel_e" name="phoneThird" maxlength="4" title="전화번호 마지막 번호 입력" class="inptxt w41">
 						                    </div>
 						                </div>
 						            </td>
@@ -337,21 +364,21 @@
 						            <td>
 						                <div class="wrapPhone">
 						                    <div id="cell_g">
-						                        <select class="cell" name="cell_g">
-                                                    <option value=""></option>
-                                                    <option value="10">010</option>
-                                                    <option value="11">011</option>
-                                                    <option value="16">016</option>
-                                                    <option value="17">017</option>
-                                                    <option value="18">018</option>
-                                                    <option value="19">019</option>
-                                                </select>
+						                        <select class="cell" name="cellphoneGroup">
+                                                                            <option value=""></option>
+                                                                            <option value="010">010</option>
+                                                                            <option value="011">011</option>
+                                                                            <option value="016">016</option>
+                                                                            <option value="017">017</option>
+                                                                            <option value="018">018</option>
+                                                                            <option value="019">019</option>
+                                                                        </select>
 						                    </div>
 						                    <div id="cell_me">
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="cell_m" name="cell_m" maxlength="4" title="핸드폰 번호 중간 번호 입력" class="inptxt w41">		
+						                        <input type="text" id="cell_m" name="cellphoneSecond" maxlength="4" title="핸드폰 번호 중간 번호 입력" class="inptxt w41">		
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="cell_e" name="cell_e" maxlength="4" title="핸드폰 번호 마지막 번호 입력" class="inptxt w41">
+						                        <input type="text" id="cell_e" name="cellphoneThird" maxlength="4" title="핸드폰 번호 마지막 번호 입력" class="inptxt w41">
 						                    </div>
 						                </div>
 						                <span class="tip2">예약시 휴대폰으로 문자가 발송됩니다.</span>
@@ -362,12 +389,12 @@
 						            <td>
 						                <div class="rdo_wrap">
 						                    <span class="rdo_btn" onclick="fn_smsclick('Y');">
-						                    <input type="radio" name="agreement" id="agreement_y" checked="checked" value="">
+						                    <input type="radio" name="sms" id="agreement_y" checked="checked" value="">
 						                    <span class="rdo_on" id="agree_fake_y"></span>
 						                    </span>
 						                    <label for="agreement_y">예</label>
 						                    <span class="rdo_btn" onclick="fn_smsclick('N');">
-						                    <input type="radio" name="agreement" id="agreement_n" value="">
+						                    <input type="radio" name="sms" id="agreement_n" value="">
 						                    <span class="rdo_off" id="agree_fake_n"></span>
 						                    </span>
 						                    <label for="agreement_n">아니오</label>
@@ -449,32 +476,32 @@
 						            <td>
 						                <div class="wrapPhone">
 						                    <div id="office_g">
-						                        <select class="tel" name="office_g" id="office_g">
-                                                    <option value=""></option>
-                                                    <option value="02">02</option>
-                                                    <option value="031">031</option>
-                                                    <option value="032">032</option>
-                                                    <option value="033">033</option>
-                                                    <option value="041">041</option>
-                                                    <option value="042">042</option>
-                                                    <option value="043">043</option>
-                                                    <option value="044">044</option>
-                                                    <option value="051">051</option>
-                                                    <option value="052">052</option>
-                                                    <option value="053">053</option>
-                                                    <option value="054">054</option>
-                                                    <option value="055">055</option>
-                                                    <option value="061">061</option>
-                                                    <option value="062">062</option>
-                                                    <option value="063">063</option>
-                                                    <option value="064">064</option>
-                                                </select>
+						                        <select class="tel" name="o_phoneGroup" id="office_g">
+                                                                            <option value=""></option>
+                                                                            <option value="02">02</option>
+                                                                            <option value="031">031</option>
+                                                                            <option value="032">032</option>
+                                                                            <option value="033">033</option>
+                                                                            <option value="041">041</option>
+                                                                            <option value="042">042</option>
+                                                                            <option value="043">043</option>
+                                                                            <option value="044">044</option>
+                                                                            <option value="051">051</option>
+                                                                            <option value="052">052</option>
+                                                                            <option value="053">053</option>
+                                                                            <option value="054">054</option>
+                                                                            <option value="055">055</option>
+                                                                            <option value="061">061</option>
+                                                                            <option value="062">062</option>
+                                                                            <option value="063">063</option>
+                                                                            <option value="064">064</option>
+                                                                        </select>
 						                    </div>
 						                    <div id="office_me">
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="office_m" name="office_m" maxlength="4" title="직장 전화번호 중간 번호 입력" class="inptxt w41">		
+						                        <input type="text" id="office_m" name="o_phoneSecond" maxlength="4" title="직장 전화번호 중간 번호 입력" class="inptxt w41">		
 						                        <span class="hyphen">-</span>
-						                        <input type="text" id="office_e" name="office_e" maxlength="4" title="직장 전화번호 마지막 번호 입력" class="inptxt w41">
+						                        <input type="text" id="office_e" name="o_phoneThird" maxlength="4" title="직장 전화번호 마지막 번호 입력" class="inptxt w41">
 						                    </div>
 						                </div>
 						            </td>
@@ -484,32 +511,32 @@
 						            <td>
 						                <div class="wrapPhone">
 						                    <div id="fax_g">
-						                        <select class="tel" name="fax_g">
-                                                    <option value=""></option>
-                                                    <option value="02">02</option>
-                                                    <option value="031">031</option>
-                                                    <option value="032">032</option>
-                                                    <option value="033">033</option>
-                                                    <option value="041">041</option>
-                                                    <option value="042">042</option>
-                                                    <option value="043">043</option>
-                                                    <option value="044">044</option>
-                                                    <option value="051">051</option>
-                                                    <option value="052">052</option>
-                                                    <option value="053">053</option>
-                                                    <option value="054">054</option>
-                                                    <option value="055">055</option>
-                                                    <option value="061">061</option>
-                                                    <option value="062">062</option>
-                                                    <option value="063">063</option>
-                                                    <option value="064">064</option>
-                                                </select>
+						                        <select class="tel" name="faxGroup">
+                                                                            <option value=""></option>
+                                                                            <option value="02">02</option>
+                                                                            <option value="031">031</option>
+                                                                            <option value="032">032</option>
+                                                                            <option value="033">033</option>
+                                                                            <option value="041">041</option>
+                                                                            <option value="042">042</option>
+                                                                            <option value="043">043</option>
+                                                                            <option value="044">044</option>
+                                                                            <option value="051">051</option>
+                                                                            <option value="052">052</option>
+                                                                            <option value="053">053</option>
+                                                                            <option value="054">054</option>
+                                                                            <option value="055">055</option>
+                                                                            <option value="061">061</option>
+                                                                            <option value="062">062</option>
+                                                                            <option value="063">063</option>
+                                                                            <option value="064">064</option>
+                                                                        </select>
 						                    </div>
 						                    <div id="fax_me">
 						                        <span class="hyphen">-</span>
-						                        <input type="text" name="fax_m" id="fax_m" maxlength="4" title="직장 전화번호 중간 번호 입력" class="inptxt w41">		
+						                        <input type="text" name="faxSecond" id="fax_m" maxlength="4" title="직장 전화번호 중간 번호 입력" class="inptxt w41">		
 						                        <span class="hyphen">-</span>
-						                        <input type="text" name="fax_e" id="fax_e" maxlength="4" title="직장 전화번호 마지막 번호 입력" class="inptxt w41">
+						                        <input type="text" name="faxThird" id="fax_e" maxlength="4" title="직장 전화번호 마지막 번호 입력" class="inptxt w41">
 						                    </div>
 						                </div>
 						            </td>
@@ -555,14 +582,14 @@
                                             </div>
                                             <span class="year_txt">일</span>
                                         </div>
-						            </td>
-						        </tr>										
-						        </table>
-						    </fieldset>	
-						    </div>
+                                    </td>
+                                </tr>										
+                                </table>
+                            </fieldset>	
+                            </div>
                             <div class="btn_wrap">
                                 <a href="#" class="sp_sub btn_cancle">취소</a>
-                                <a onclick="$('form#frmJoin').submit();" class="sp_sub btn_next">다음</a>
+                                <button type="submit" class="sp_sub btn_next" value="다음">
                             </div>
                          </form>
                     </div>
