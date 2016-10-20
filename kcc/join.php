@@ -1,5 +1,5 @@
 <?php
-@include 'dbCon.php';
+include 'dbCon.php';
 /* 정규식 적용 함수 */
 function cellFormat($g,$s,$t) {
     $cellPattern = "/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/"; //핸드폰번호 정규식
@@ -10,9 +10,15 @@ function phoneFormat($g,$s,$t) {
     return preg_replace($phonePattern,"$1-$2-$3", $g.$s.$t);
 }
 function dateFormat($y,$m,$d) {
-    $datePattern = "(19[7-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])"; //날짜 정규식
-    return preg_replace($datePattern,"$1-$2-$3", $y.$m.$d);
-}
+    $zero = "0";
+    $datePattern = "/([0-9]{4})([0-9]{2})([0-9]{2})/"; //날짜 정규식
+    if ($m<=9)
+       $m = $zero . $m;
+    if ($d<=9)
+       $d = $zero . $d;
+       
+    return preg_replace($datePattern,"$1-$2-$3", $y.$m.$d); 
+    } 
 $korName = $_POST['korName'];
 $engName = $_POST['engName'];
 $birthYear = $_POST['birthYear'];
@@ -28,6 +34,7 @@ $cellphoneGroup = $_POST['cellphoneGroup'];
 $cellphoneSecond = $_POST['cellphoneSecond'];
 $cellphoneThird = $_POST['cellphoneThird'];
 $sms = $_POST['sms'];
+$email = $_POST['email'];
 $h_postcode = $_POST['h_postcode'];
 $h_address = $_POST['home_addr1'];
 $h_address2 = $_POST['home_addr2'];
@@ -56,12 +63,31 @@ $r_oPhone = phoneFormat($o_phoneGroup,$o_phoneSecond,$o_phoneThird); //회사번
 $r_Fax = phoneFormat($faxGroup,$faxSecond,$faxThird); //팩스번호
 $r_Birth = dateFormat($birthYear,$birthMonth,$birthDay);
 $r_Marry = dateFormat($marryYear,$marryMonth,$marryDay);
-/*
-$sql = "INSERT INTO `member`(`idx`, `kName`, `eName`, `birth`, `id`, `pw`, `phone`, `cellphone`, `sms`, `email`, `housePostcode`, `houseAddress`, `DM`, `officeName`, `jobFamily`, `jobPosition`, `officePostcode`, `officeAddress`, `officePhone`, `faxNumber`, `chkMarry`, `weddingDay`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13],[value-14],[value-15],[value-16],[value-17],[value-18],[value-19],[value-20],[value-21],[value-22])";
+$r_homeAddr = $h_address.$h_address2;
+$r_officeAddr = $o_address.$o_address2;
+
+/*$sql = "INSERT INTO member(kName, eName, birth, id, pw, phone, cellphone, sms, email, housePostcode, houseAddress, DM, officeName, jobFamily, jobPosition, officePostcode, officeAddress, officePhone, faxNumber, chkMarry, weddingDay) "
+                  . "VALUES (:kName, :eName, :birth, :id, :pw, :phone, :cellphone, :sms, :email, :housePostcode, :houseAddress, :DM, :officeName, :jobFamily, :jobPosition, :officePostcode, :officeAddress, :officePhone, :faxNumber, :chkMarry, :weddingDay)";
+*/
+$sql = "insert into member (kName, eName, birth, id, pw, phone, cellphone, sms, email, housePostcode, houseAddress, DM, officeName, jobFamily, jobPosition, officePostcode, officeAddress, officePhone, faxNumber, chkMarry, weddingDay)"
+        . " values (:kName, :eName, :birth, :id, :pw, :phone, :cellphone, :sms, :email, :housePostcode, :houseAddress, :DM, :officeName, :jobFamily, :jobPosition, :officePostcode, :officeAddress, :officePhone, :faxNumber, :chkMarry, :weddingDay)";
 $stmt = $pdo->prepare($sql);
+$stmt->bindValue(':kName', $korName);
+$stmt->bindValue(':eName', $engName);
+$stmt->bindValue(':birth', $korName);
+$stmt->bindValue(':id', $id);
+$stmt->bindValue(':pw', $password);
+$stmt->bindValue(':phone', $r_Phone);
+$stmt->bindValue(':cellphone', $r_Cell);
+$stmt->bindValue(':sms', $sms);
+$stmt->bindValue(':email', $email);
+$stmt->bindValue(':housePostcode', $h_postcode);
+$stmt->bindValue(':houseAddress', $r_homeAddr);
+$stmt->bindValue(':DM', $dm);
+$stmt->bindValue(':officeName', $o_Name);
 $stmt->execute();
-$result = $stmt->rowCount();
-echo ($result);
- */
-print $r_Birth. "   " . $r_Marry;
+/*
+$stmt = $pdo->query($sql);
+
+*/
 ?>

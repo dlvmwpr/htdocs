@@ -1,0 +1,3 @@
+#mainTable { width:700px; margin:0 auto;text-align: center; line-height: 30px; }
+#mainTable th { background-color:#444; color:#fff;}
+#mainTable td { background-color:#999; color:#E1E2E3; }
