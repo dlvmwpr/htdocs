@@ -10,7 +10,6 @@ try {
     $pdo = new PDO($db,$db_user,$db_pass);
     $pdo -> setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
     $pdo -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    print "성공";
 } catch (PDOException $Exception) {
     die("오류".$Exception->getMessage());
 }

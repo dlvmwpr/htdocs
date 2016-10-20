@@ -18,7 +18,7 @@ function dateFormat($y,$m,$d) {
        $d = $zero . $d;
        
     return preg_replace($datePattern,"$1-$2-$3", $y.$m.$d); 
-    } 
+ } 
 $korName = $_POST['korName'];
 $engName = $_POST['engName'];
 $birthYear = $_POST['birthYear'];
@@ -66,9 +66,6 @@ $r_Marry = dateFormat($marryYear,$marryMonth,$marryDay);
 $r_homeAddr = $h_address.$h_address2;
 $r_officeAddr = $o_address.$o_address2;
 
-/*$sql = "INSERT INTO member(kName, eName, birth, id, pw, phone, cellphone, sms, email, housePostcode, houseAddress, DM, officeName, jobFamily, jobPosition, officePostcode, officeAddress, officePhone, faxNumber, chkMarry, weddingDay) "
-                  . "VALUES (:kName, :eName, :birth, :id, :pw, :phone, :cellphone, :sms, :email, :housePostcode, :houseAddress, :DM, :officeName, :jobFamily, :jobPosition, :officePostcode, :officeAddress, :officePhone, :faxNumber, :chkMarry, :weddingDay)";
-*/
 $sql = "insert into member (kName, eName, birth, id, pw, phone, cellphone, sms, email, housePostcode, houseAddress, DM, officeName, jobFamily, jobPosition, officePostcode, officeAddress, officePhone, faxNumber, chkMarry, weddingDay)"
         . " values (:kName, :eName, :birth, :id, :pw, :phone, :cellphone, :sms, :email, :housePostcode, :houseAddress, :DM, :officeName, :jobFamily, :jobPosition, :officePostcode, :officeAddress, :officePhone, :faxNumber, :chkMarry, :weddingDay)";
 $stmt = $pdo->prepare($sql);
@@ -85,9 +82,16 @@ $stmt->bindValue(':housePostcode', $h_postcode);
 $stmt->bindValue(':houseAddress', $r_homeAddr);
 $stmt->bindValue(':DM', $dm);
 $stmt->bindValue(':officeName', $o_Name);
-$stmt->execute();
-/*
-$stmt = $pdo->query($sql);
+$stmt->bindValue(':jobFamily', $o_jobFamily);
+$stmt->bindValue(':jobPosition', $o_jobPosition);
+$stmt->bindValue(':officePostcode', $o_postcode);
+$stmt->bindValue(':officeAddress', $r_officeAddr);
+$stmt->bindValue(':officePhone', $r_oPhone);
+$stmt->bindValue(':faxNumber', $r_Fax);
+$stmt->bindValue(':chkMarry', $marry);
+$stmt->bindValue(':weddingDay', $r_Marry);
 
-*/
+$stmt->execute();
+
+echo "<meta http-equiv='refresh' content='0; url=sub3.php' >";
 ?>
