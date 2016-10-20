@@ -63,7 +63,5 @@ a{text-decoration:none; border:1px solid #acacac; color: black;}
 .gOption { width:50px !important; line-height:28px; float:left; }
 
 .selectbox {float:left;}
-
-
-
-
+#lineMarry {display:none;}
+.showLine {display:table-row;}

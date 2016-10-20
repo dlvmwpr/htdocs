@@ -140,15 +140,14 @@
             }
         }
         function validForm() {
-            if (vailded === true || $("#korName").val || $("#birthYear").val || $("#birthMonth").val || $("#birthDay").val || 
-                    $("#userid").val || $("#password").val || $("#password_confirm").val || $("#password").val === $("#password_confirm").val ||
-                    $("#cell_g").val || $("#cell_m").val || $("#cell_e").val || $("#sms").val || $("#h_postcode").val || $("#home_addr1").val ||
-                    $("#home_addr2").val || $("#dm").val || $("#office_name").val || $("position").val || $("#o_postcode").val || 
-                    $("#office_addr1").val || $("#office_addr2").val ) {
-                alert ("보낸다");
+            if (vailded === true && $("#korName").val && $("#birthYear").val && $("#birthMonth").val && $("#birthDay").val && 
+                    $("#userid").val && $("#password").val && $("#password_confirm").val && $("#password").val === $("#password_confirm").val &&
+                    $("#cell_g").val && $("#cell_m").val && $("#cell_e").val && $("#sms").val && $("#h_postcode").val && $("#home_addr1").val &&
+                    $("#home_addr2").val && $("#dm").val && $("#office_name").val && $("position").val && $("#o_postcode").val && 
+                    $("#office_addr1").val && $("#office_addr2").val ) {
                 return true;
             } else {
-                alert ("실패");
+                alert ("잘못 입력하였거나, 입력하지 않은 항목이 있습니다.");
                 return false;
             }
         }
@@ -583,7 +582,7 @@
                                                                     </div>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr id ="lineMarry" class = "hideLine">
                                                                 <th><span>결혼기념일</span></th>
                                                                 <td>
                                                                     <div id="wrapDate">

@@ -140,6 +140,9 @@ $(document).ready(function(){
       // agree_fake_n 찾아서 class 명을 rdo_off 부여한다.
       var fakeN = document.getElementById("marry_fake_n");
       fakeN.setAttribute("class", "rdo_off");
+      
+      var line = document.getElementById("lineMarry");
+      line.setAttribute("class", "showLine");
     }
     else if(marry == "N"){
       // agreement_y 찾아서 checked="checked" 삭제한다
@@ -157,5 +160,8 @@ $(document).ready(function(){
       // agree_fake_n 찾아서 class 명을 rdo_on 부여한다.
       var fakeN = document.getElementById("marry_fake_n");
       fakeN.setAttribute("class", "rdo_on");
+      
+      var line = document.getElementById("lineMarry");
+      line.setAttribute("class", "hideLine");
     }
   }

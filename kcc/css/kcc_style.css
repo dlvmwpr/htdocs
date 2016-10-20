@@ -378,61 +378,20 @@ address{background-color:#444;line-height:30px;text-align:center;color:#fff}
 .right_con{margin:45px 0 0}
 .join_step li{width:21.5%;height:60px;line-height:60px}
 }
-.date {
-    width:85px; float:left;
-}
-
-#wrapDate {
-    height:28px; width:350px;
-}
-
-.wrapPhone {
-    width:280px;
-}
-
-#tel_g {
-    width:70px; float:left;
-}
-
-#tel_me {
-    float:left; width:140px;
-}
-
-#cell_g {
-    width:70px; float:left;
-}
-
-#cell_me {
-    float:left; width:140px;
-}
-
-#office_g {
-    width:70px; float:left;
-}
-
-#fax_g {
-    width:70px; float:left;
-}
-
-#office_me {
-    float:left; width:140px;
-}
-
-#fax_me {
-    float:left; width:140px;
-}
-
-#wrapmDate {
-    height:28px; width:350px;
-}
-.vaildErr {
-    background-color:#EA8484;
-}
-#idVaild {
-    line-height: 12px;
-    font-size:12px;
-}
-
-.vaildHidden {
-    display:none;
-}
+.date { width:85px; float:left; }
+#wrapDate { height:28px; width:350px; }
+.wrapPhone { width:280px; }
+#tel_g { width:70px; float:left; }
+#tel_me { float:left; width:140px; }
+#cell_g { width:70px; float:left; }
+#cell_me { float:left; width:140px; }
+#office_g { width:70px; float:left; }
+#fax_g { width:70px; float:left; }
+#office_me { float:left; width:140px; }
+#fax_me { float:left; width:140px; }
+#wrapmDate { height:28px; width:350px; }
+.vaildErr { background-color:#EA8484; }
+#idVaild { line-height: 12px; font-size:12px; }
+.vaildHidden { display:none; }
+.hideLine { display:none; }
+.showLine { display:table-row; }
