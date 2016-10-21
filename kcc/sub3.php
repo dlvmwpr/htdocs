@@ -14,6 +14,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             vailded = false;
+            pass_vailded = false;
         });
         function execDaumPostcode() {
             new daum.Postcode({
@@ -139,12 +140,29 @@
                 $("#emailVaild").addClass('vaildHidden');
             }
         }
+        function vaildPass() {
+            var pass = $('#password').val();
+            var pass_c = $("#password_confirm").val();
+            $("#passVaild").removeClass('vaildHidden');
+            if (pass === pass_c) {
+                pass_vailded = true;
+                $(".txtPassVaild").text("입력한 비밀번호가 일치합니다.");
+                $(".txtPassVaild").css("color","#666");
+            } else {
+                pass_vailded = false;
+                $(".txtPassVaild").text("입력한 비밀번호가 일치하지 않습니다.");
+                $(".txtPassVaild").css("color","#e60012");
+            }
+            
+            if (!pass_c || !pass) { 
+                $("#passVaild").addClass('vaildHidden');
+            }
+        }
         function validForm() {
-            if (vailded === true && $("#korName").val && $("#birthYear").val && $("#birthMonth").val && $("#birthDay").val && 
-                    $("#userid").val && $("#password").val && $("#password_confirm").val && $("#password").val === $("#password_confirm").val &&
-                    $("#cell_g").val && $("#cell_m").val && $("#cell_e").val && $("#sms").val && $("#h_postcode").val && $("#home_addr1").val &&
-                    $("#home_addr2").val && $("#dm").val && $("#office_name").val && $("position").val && $("#o_postcode").val && 
-                    $("#office_addr1").val && $("#office_addr2").val ) {
+            if (vailded === true && $("#userid").val && $("#korName").val && $("#birthYear").val && $("#birthMonth").val && $("#birthDay").val && 
+                $("#userid").val && $("#password").val && $("#password_confirm").val && pass_vailded === true && $("#cell_g").val &&
+                $("#cell_m").val && $("#cell_e").val && $("#sms").val && $("#h_postcode").val && $("#home_addr1").val && $("#home_addr2").val &&
+                $("#dm").val && $("#office_name").val && $("position").val && $("#o_postcode").val && $("#office_addr1").val && $("#office_addr2").val ) {
                 return true;
             } else {
                 alert ("잘못 입력하였거나, 입력하지 않은 항목이 있습니다.");
@@ -164,78 +182,76 @@
 	<!-- header -->	
     <div id="header">	
             <h1 class="logo">
-                    <a href="#" class="sp_com kcc">
-                            <strong class="blind">KCC 금강컨트리클럽</strong>
-                    </a>
+                <a href="index.php" class="sp_com kcc">
+                    <strong class="blind">KCC 금강컨트리클럽</strong>
+                </a>
             </h1>			
             <div id="site_gnb">	
-                    <ul class="gnb_menu">
-                    <li>김윤미님 환영합니다</li>
-                    <li><a href="#">회원정보수정</a></li>
-                    <li><a href="#">채팅룸</a></li>
-                    <li><a href="#">로그아웃</a></li>
-                    <li><a href="#">사이트맵</a></li>
-                    </ul>
-                    <a class="m_gnb_ico"></a>
+                <ul class="gnb_menu">
+                <li><a href="#">로그인</a></li>
+                <li><a href="sub3.php">회원가입</a></li>
+                <li><a href="#">사이트맵</a></li>
+                </ul>
+                <a class="m_gnb_ico"></a>
             </div>
             <div id="site_menu">
                     <h2>
-                            <a class="m_menu_ico"><span  class="blind">사이트메뉴</span></a>
+                        <a class="m_menu_ico"><span  class="blind">사이트메뉴</span></a>
                     </h2>
                     <!--해당메뉴 li class에 selected 추가-->
                     <div class="menu_lst_wrap">
                             <ul class="site_menu_lst">
                                     <li class="menu1">
-                                                                <a href="#" class="sp_com site_menu1">Introduction 클럽소개</a>
-                                                                <ul class="site_sub_menu">
-                                                                <li><a href="#" class="sp_com site_menu1_1">클럽소개</a></li>
-                                                                <li><a href="#" class="sp_com site_menu1_2">연혁</a></li>
-                                                                <li><a href="#" class="sp_com site_menu1_3">이용안내</a></li>
-                                                                <li><a href="#" class="sp_com site_menu1_4">관계사 소개</a></li>
-                                                                <li><a href="#" class="sp_com site_menu1_5">오시는 길</a></li>
-                                                                <li><a href="#" class="sp_com site_menu1_6">CONTACT US</a></li>
-                                                                </ul>
+                                        <a href="#" class="sp_com site_menu1">Introduction 클럽소개</a>
+                                        <ul class="site_sub_menu">
+                                        <li><a href="#" class="sp_com site_menu1_1">클럽소개</a></li>
+                                        <li><a href="#" class="sp_com site_menu1_2">연혁</a></li>
+                                        <li><a href="#" class="sp_com site_menu1_3">이용안내</a></li>
+                                        <li><a href="#" class="sp_com site_menu1_4">관계사 소개</a></li>
+                                        <li><a href="#" class="sp_com site_menu1_5">오시는 길</a></li>
+                                        <li><a href="#" class="sp_com site_menu1_6">CONTACT US</a></li>
+                                        </ul>
                                     </li>
                                     <li class="menu2">
-                                                                <a href="#" class="sp_com site_menu2">RESERVATION 예약정보</a>
-                                                                <ul class="site_sub_menu">
-                                                                <li><a href="#" class="sp_com site_menu2_1">예약관리</a></li>
-                                                                <li><a href="#" class="sp_com site_menu2_2">조인관리</a></li>
-                                                                <li><a href="#" class="sp_com site_menu2_3">이용내역</a></li>
-                                                                <li><a href="#" class="sp_com site_menu2_4">위약정보</a></li>
-                                                                </ul>
-                                 </li>
-                                 <li class="menu3">
-                                                                <a href="#" class="sp_com site_menu3">COURCE 코스안내</a>
-                                                                <ul class="site_sub_menu">
-                                                                <li><a href="#" class="sp_com site_menu3_1">코스소개</a></li>
-                                                                <li><a href="#" class="sp_com site_menu3_2">서코스</a></li>
-                                                                <li><a href="#" class="sp_com site_menu3_3">동코스</a></li>
-                                                                <li><a href="#" class="sp_com site_menu3_4">남코스</a></li>
-                                                                <li><a href="#" class="sp_com site_menu3_5">코스 갤러리</a></li>
-                                                                </ul>
-                                 </li>
-                                <li class="menu4">
-                                                                <a href="#" class="sp_com site_menu4">FACILITIES 시설안내</a>
-                                                                <ul class="site_sub_menu">
-                                                                <li><a href="#" class="sp_com site_menu4_1">클럽하우스</a></li>
-                                                                <li><a href="#" class="sp_com site_menu4_2">특선메뉴</a></li>
-                                                                <li><a href="#" class="sp_com site_menu4_3">그늘집</a></li>
-                                                                <li><a href="#" class="sp_com site_menu4_4">락커룸</a></li>
-                                                                <li><a href="#" class="sp_com site_menu4_5">프로샵</a></li>
-                                                                </ul>
+                                        <a href="#" class="sp_com site_menu2">RESERVATION 예약정보</a>
+                                        <ul class="site_sub_menu">
+                                        <li><a href="#" class="sp_com site_menu2_1">예약관리</a></li>
+                                        <li><a href="#" class="sp_com site_menu2_2">조인관리</a></li>
+                                        <li><a href="#" class="sp_com site_menu2_3">이용내역</a></li>
+                                        <li><a href="#" class="sp_com site_menu2_4">위약정보</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu3">
+                                        <a href="#" class="sp_com site_menu3">COURCE 코스안내</a>
+                                        <ul class="site_sub_menu">
+                                        <li><a href="#" class="sp_com site_menu3_1">코스소개</a></li>
+                                        <li><a href="#" class="sp_com site_menu3_2">서코스</a></li>
+                                        <li><a href="#" class="sp_com site_menu3_3">동코스</a></li>
+                                        <li><a href="#" class="sp_com site_menu3_4">남코스</a></li>
+                                        <li><a href="#" class="sp_com site_menu3_5">코스 갤러리</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu4">
+                                        <a href="#" class="sp_com site_menu4">FACILITIES 시설안내</a>
+                                        <ul class="site_sub_menu">
+                                        <li><a href="#" class="sp_com site_menu4_1">클럽하우스</a></li>
+                                        <li><a href="#" class="sp_com site_menu4_2">특선메뉴</a></li>
+                                        <li><a href="#" class="sp_com site_menu4_3">그늘집</a></li>
+                                        <li><a href="#" class="sp_com site_menu4_4">락커룸</a></li>
+                                        <li><a href="#" class="sp_com site_menu4_5">프로샵</a></li>
+                                        </ul>
                                     </li>
                                     <li class="menu5">
-                                                                <a href="#" class="sp_com site_menu5">COMMUNITY 커뮤니티</a>
-                                                                <ul class="site_sub_menu">
-                                                                <li><a href="#" class="sp_com site_menu5_1">공지사항</a></li>
-                                                                <li><a href="#" class="sp_com site_menu5_2">자료실</a></li>
-                                                                <li><a href="#" class="sp_com site_menu5_3">Joinroom</a></li>
-                                                                </ul>
+                                        <a href="#" class="sp_com site_menu5">COMMUNITY 커뮤니티</a>
+                                        <ul class="site_sub_menu">
+                                        <li><a href="#" class="sp_com site_menu5_1">공지사항</a></li>
+                                        <li><a href="#" class="sp_com site_menu5_2">자료실</a></li>
+                                        <li><a href="#" class="sp_com site_menu5_3">Joinroom</a></li>
+                                        </ul>
                                     </li>
                             </ul>
                         <div class="close_box close_box2">
-                                <a href="#" class="btn_close"><span class="blind">메뉴 닫기</span></a>
+                            <a href="#" class="btn_close"><span class="blind">메뉴 닫기</span></a>
                         </div>
                     </div>
             </div>
@@ -247,37 +263,37 @@
             <div id="content">
                     <div class="sub_con">
                             <div class="left_con">
-                                    <h2 class="sp_sub lnb_title">회원서비스</h2>
-                                    <ul class="lnb">
-                                    <li><a href="#">로그인<span class="sp_sub select_ico"></span></a></li>
-                                    <li><a href="#" class="selected_hard">회원가입<span class="sp_sub select_ico"></span></a></li>
-                                    <li><a href="#">아이디/비밀번호찾기<span class="sp_sub select_ico"></span></a></li>
-                                    <li><a href="#">회원정보 수정<span class="sp_sub select_ico"></span></a></li>
-                                    <li><a href="#">개인정보 취급방침<span class="sp_sub select_ico"></span></a></li>
-                                    </ul> 
+                                <h2 class="sp_sub lnb_title">회원서비스</h2>
+                                <ul class="lnb">
+                                <li><a href="#">로그인<span class="sp_sub select_ico"></span></a></li>
+                                <li><a href="#" class="selected_hard">회원가입<span class="sp_sub select_ico"></span></a></li>
+                                <li><a href="#">아이디/비밀번호찾기<span class="sp_sub select_ico"></span></a></li>
+                                <li><a href="#">회원정보 수정<span class="sp_sub select_ico"></span></a></li>
+                                <li><a href="#">개인정보 취급방침<span class="sp_sub select_ico"></span></a></li>
+                                </ul> 
                             </div>		
                             <div class="right_con">	
                                     <p class="pg_nav">	
-                                            <a href="#">홈</a>
-                                            <span>&gt;</span>
-                                            <a href="#">회원서비스</a>						
-                                            <span>&gt;</span>
-                                            <strong>회원가입</strong>
+                                        <a href="#">홈</a>
+                                        <span>&gt;</span>
+                                        <a href="#">회원서비스</a>						
+                                        <span>&gt;</span>
+                                        <strong>회원가입</strong>
                                     </p>
                                     <div class="join_wrap">	
-                                            <h2 class="sp_sub join_title">회원가입</h2>
-                                            <p class="join_txt">다양한 서비스와 풍부한 컨텐츠를 만나실 수 있는 회원가입입니다.</p>
-                                            <ol class="join_step">
-                                            <li>약관동의</li>
-                                            <li>본인인증<span class="sp_sub ico_arr"></span></li>
-                                            <li class="selected">회원정보입력<span class="sp_sub ico_arr"></span></li>
-                                            <li>가입완료<span class="sp_sub ico_arr"></span></li>
-                                            </ol>
+                                        <h2 class="sp_sub join_title">회원가입</h2>
+                                        <p class="join_txt">다양한 서비스와 풍부한 컨텐츠를 만나실 수 있는 회원가입입니다.</p>
+                                        <ol class="join_step">
+                                        <li>약관동의</li>
+                                        <li>본인인증<span class="sp_sub ico_arr"></span></li>
+                                        <li class="selected">회원정보입력<span class="sp_sub ico_arr"></span></li>
+                                        <li>가입완료<span class="sp_sub ico_arr"></span></li>
+                                        </ol>
                                     </div>
                                     <div class="article_box">
                                             <div class="art_tit_wrap">
-                                                    <h3 class="article_tit">상세정보 입력</h3>
-                                                    <p class="tip"><em>*</em>표시는 필수입력 항목입니다.</p>
+                                                <h3 class="article_tit">상세정보 입력</h3>
+                                                <p class="tip"><em>*</em>표시는 필수입력 항목입니다.</p>
                                             </div>					
                                             <form action="join.php" method="post" id="frmJoin" name="frmJoin" onsubmit="return validForm()">
                                                         <div class="enter_area">
@@ -333,16 +349,20 @@
                                                             <tr>
                                                                 <th><label for="password">비밀번호</label><em>*</em></th>
                                                                 <td>
-                                                                    <input type="password" id="password" name="password" class="inptxt">
+                                                                    <input type="password" id="password" onkeyup="vaildPass()" name="password" class="inptxt">
                                                                     <span class="tip2">영문 소문자, 숫자 포함 4자리 이상 10자리 이하입니다.</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <th><label for="password_confirm">비밀번호 확인</label><em>*</em></th>
                                                                 <td>
-                                                                    <input type="password" id="password_confirm" name="confirm_password" class="inptxt">
+                                                                    <input type="password" id="password_confirm" onkeyup="vaildPass()" name="password_confirm" class="inptxt">
                                                                     <span class="tip2">비밀번호를 한번 더 입력하세요.</span>
                                                                 </td>
+                                                            </tr>
+                                                            <tr class="vaildHidden" id="passVaild">
+                                                                <td></td>
+                                                                <td><span class="txtPassVaild">vaildpass</span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span>전화번호</span></th>

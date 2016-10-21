@@ -19,6 +19,7 @@ input,select,textarea{font-family:'나눔고딕',NanumGothic,nanumG,'돋움',dot
 button{overflow:visible;border:0 none;background-color:transparent;vertical-align:middle;cursor:pointer}
 button::-moz-focus-inner{padding:0;border:0}
 address,caption,em{font-style:normal}
+.enter_area caption { display:none; font-style: normal; }
 a{color:#000;text-decoration:none;cursor:pointer}
 a:focus,a:active,a:hover{color:#000;text-decoration:underline}
 table{border:0;border-collapse:collapse;border-spacing:0;table-layout:fixed}
@@ -36,6 +37,7 @@ p{color:#333}
 .sp_sub{display:inline-block;overflow:hidden;background:url(../img/sp_sub.png) no-repeat;text-indent:-9999px}
 .sp_sub{display:inline-block;overflow:hidden;background:url(../img/sp_sub.png) no-repeat;text-indent:-9999px}
 .sp_ly{background:url(../img/sp_layer2.png) no-repeat}
+.sp_subtit, .sp_dot { display: inline-block; overflow:hidden; width:auto; height:10px; background:url(../img/sp_subtit.png) no-repeat; font-size:0; line-height: 999px; vertical-align: top;  }
 .btn_img{display:inline-block;background:url(../img/sp_btn.gif) no-repeat}
 .rdo_btn .rdo_on,
 .rdo_btn .rdo_off{display:inline-block;overflow:hidden;font-size:0;line-height:999px;background:url(../img/sp_rdo.png) no-repeat}
@@ -149,6 +151,7 @@ p{color:#333}
 .site_menu_lst .selected.site_menu5_2:hover{background-position:-350px -225px}
 .site_menu_lst .selected.site_menu5_3:hover{background-position:-350px -240px}
 .close_box{display:none}
+
 /*footer*/
 #footer{background:url(../img/bg_footer.jpg) no-repeat 50% 0}
 .f_inner{padding:83px 0 257px;font-size:11px}
@@ -205,7 +208,7 @@ address{margin-top:8px;color:#232426;letter-spacing:-0.6px}
 .notice_pg:after{display:block;clear:both;content:""}
 .notice_pg .sp_main{width:20px;height:20px;text-indent:-9999px}
 .notice_pg .btn_pre{float:left;background-position:-296px 0}
-.notice_pg .btn_next{float:left;margin-left:3px;background-position:-321px 0}
+.notice_pg .btn_next{float:left;margin-left:3px; margin-top:0;background-position:-321px 0}
 .notice_more{display:none}
 .banner{position:absolute;top:0;right:0;width:490px}
 
@@ -395,3 +398,16 @@ address{background-color:#444;line-height:30px;text-align:center;color:#fff}
 .vaildHidden { display:none; }
 .hideLine { display:none; }
 .showLine { display:table-row; }
+.nav_tit { position:absolute; bottom:100%; right:0; left:0; margin-bottom:20px; }
+.stit_notice { width:104px; height:28px; background-position:-172px -62px;}
+.nav_tit .com_tit { width:133px; height:37px; background-position: 0 -38px;}
+.not_tb { width: 100%; font-size:14px; margin-top: 30px; border-top: 3px solid #115fad; border-bottom: 3px solid #ccc; table-layout: fixed;}
+caption { display: table-caption; text-align: -webkit-center; }
+colgroup { display: table-column-group; }
+thead { display: table-header-group; vertical-align: middle; border-color: inherit; }
+tbody { display: table-row-group; vertical-align: middle; border-color: inherit; }
+tr { display: table-row; vertical-align: inherit; border-color: inherit; }
+.not_tb td { padding: 18px 0 19px; border-top: 1px solid #ccc; text-align: center; }
+.not_tb th { padding: 13px 0 14px; background: #f2f8ff; }
+.not_tb td.con { text-align: left; }
+.not_tb td.con .in { padding-left: 26px; }

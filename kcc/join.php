@@ -71,7 +71,7 @@ $sql = "insert into member (kName, eName, birth, id, pw, phone, cellphone, sms, 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':kName', $korName);
 $stmt->bindValue(':eName', $engName);
-$stmt->bindValue(':birth', $korName);
+$stmt->bindValue(':birth', $r_Birth);
 $stmt->bindValue(':id', $id);
 $stmt->bindValue(':pw', $password);
 $stmt->bindValue(':phone', $r_Phone);

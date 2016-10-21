@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    for (var i=1901;i<=2016;i++) {
+    for (var i=2016;i>=1901;i--) {
         var year;
             year = "<option value="+i+">"+i+"</option>";
         $(".selYear").append(year);
@@ -80,7 +80,6 @@ $(document).ready(function(){
       fakeN.setAttribute("class", "rdo_on");
     }
   }
-
 
 //라디오버튼 DM
  function fn_dmclick(at)
