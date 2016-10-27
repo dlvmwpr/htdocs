@@ -65,3 +65,4 @@ a{text-decoration:none; border:1px solid #acacac; color: black;}
 .selectbox {float:left;}
 #lineMarry {display:none;}
 .showLine {display:table-row;}
+.tb_view { width:100%; }

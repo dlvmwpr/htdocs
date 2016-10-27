@@ -130,32 +130,26 @@
 						<h2 class="sp_subtit stit_notice">커뮤니티</h2>
 						<p class="join_txt">금강컨트리클럽을 이용하시기 불편함 없도록 밝고 건강한 새로운 소식을 회원님께 알려드립니다.</p>
 					</div>	
-					<div class="article_box">
-                                            <table class="not_tb">
-                                                <caption> <span class="blind">공지사항 안내</span></caption>
-                                                <colgroup><col style="width:68px"><col><col style="width:137px"><col style="width:82px"></colgroup>
-                                                <thead>
-                                                    <tr> <th> 번호 </th> <th> 제목 </th> <th> 등록일 </th> <th> 조회수 </th>
-                                                </thead>
-                                                <tbody>
-                                                    <?php 
-                                                        include "dbCon.php";
-                                                        $sql = "SELECT * FROM board order by idx DESC";
-                                                        $stmt = $pdo->prepare($sql);
-                                                        $stmt->execute();
-                                                        foreach ($stmt as $row) {
-                                                            $idx = $row['idx'];
-                                                            $subject = $row['subject'];
-                                                            $date = $row['date'];
-                                                            $hits = $row['hits'];
-                                                            echo "<tr><td>$idx</td><td class='con'><div class='in'><a href='#'>$subject</a></div></td><td>$date</td><td>$hits</td></tr>";
-                                                        }
-                                                        
-                                                    ?>
-                                                </tbody>
-                                            </table>
-					</div>	
-				</div>
+                                        <form id='writeBoard' action='post_board.php' method='post'>
+                                            <div class="article_box">
+                                                <table class="not_wrt">
+                                                    <caption> <span class="blind">공지사항 작성</span></caption>
+                                                    <thead> <tr> <th class='write_caption'> 제목 </th> <td class='tb_biginp'> <input type='text' class="inptxt wsubject" name='subject'/> </td> <th class='write_caption'> 작성자 </th> <td class='tb_smallinp'> <input type='text' class="inptxt w70" name='writer'/> </td> </tr></thead>
+                                                    <tbody>
+                                                        <tr> <th class='write_caption'> 내용 </th>
+                                                            <td colspan='3'>
+                                                                <textarea class='write_content' name='content'></textarea>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class='wrapBtnview'>
+                                                    <a href="#" onclick="$('#writeBoard').submit()" class="sp_coms btn_view">등록</a>
+                                                    <a href="board.php" class="sp_coms btn_view">취소</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
 				</div>	
 		</div>	
 	</div>
