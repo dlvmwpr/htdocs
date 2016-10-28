@@ -110,30 +110,31 @@
 	<!-- container -->
 	<div id="container">
 		<div id="content">
-				<div class="sub_con">
-				<div class="left_con">
-                                    <h2 class="nav_tit"><span class="sp_subtit com_tit">커뮤니티</span></h2>
-					<ul class="lnb">
-                                        <li><a href="#" class="selected_hard">공지사항<span class="sp_sub select_ico"></span></a></li>
-					<li><a href="#">자료실<span class="sp_sub select_ico"></span></a></li>
-					</ul> 
-				</div>		
-				<div class="right_con">	
-					<p class="pg_nav">	
-						<a href="#">홈</a>
-						<span>&gt;</span>
-						<a href="#">커뮤니티</a>						
-						<span>&gt;</span>
-						<strong>공지사항</strong>
-					</p>
-					<div class="join_wrap">	
-						<h2 class="sp_subtit stit_notice">커뮤니티</h2>
-						<p class="join_txt">금강컨트리클럽을 이용하시기 불편함 없도록 밝고 건강한 새로운 소식을 회원님께 알려드립니다.</p>
-					</div>	
+                        <div class="sub_con">
+                        <div class="left_con">
+                            <h2 class="nav_tit"><span class="sp_subtit com_tit">커뮤니티</span></h2>
+                                <ul class="lnb">
+                                <li><a href="#" class="selected_hard">공지사항<span class="sp_sub select_ico"></span></a></li>
+                                <li><a href="#">자료실<span class="sp_sub select_ico"></span></a></li>
+                                </ul> 
+                                </div>		
+                                <div class="right_con">	
+                                        <p class="pg_nav">	
+                                                <a href="#">홈</a>
+                                                <span>&gt;</span>
+                                                <a href="#">커뮤니티</a>						
+                                                <span>&gt;</span>
+                                                <strong>공지사항</strong>
+                                        </p>
+                                        <div class="join_wrap">	
+                                                <h2 class="sp_subtit stit_notice">커뮤니티</h2>
+                                                <p class="join_txt">금강컨트리클럽을 이용하시기 불편함 없도록 밝고 건강한 새로운 소식을 회원님께 알려드립니다.</p>
+                                        </div>	
                                         <form id='writeBoard' action='post_board.php' method='post'>
                                             <div class="article_box">
                                                 <table class="not_wrt">
-                                                    <caption> <span class="blind">공지사항 작성</span></caption>
+                                                    <caption> <span class="blind">공지사항 수정</span></caption>
+                                                    
                                                     <thead> <tr> <th class='write_caption'> 제목 </th> <td class='tb_biginp'> <input type='text' class="inptxt wsubject" name='subject'/> </td> <th class='write_caption'> 작성자 </th> <td class='tb_smallinp'> <input type='text' class="inptxt w70" name='writer'/> </td> </tr></thead>
                                                     <tbody>
                                                         <tr> <th class='write_caption'> 내용 </th>
@@ -150,8 +151,8 @@
                                             </div>
                                         </form>
                                     </div>
-				</div>	
 		</div>	
+                     </div>	
 	</div>
 	<!-- //container -->
 	<hr>

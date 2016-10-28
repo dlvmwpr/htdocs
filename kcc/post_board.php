@@ -5,9 +5,9 @@ $sql = "insert into board (subject, writer, content, date)"
 
 $subject = $_POST['subject'];
 $writer = $_POST['writer'];
-$content = $_POST['content'];
-date_default_timezone_set('Asia/Seoul');
-$date = date("yyyy-mm-dd");
+$date = date("Y-m-d", mktime(0,0,0,date("m"),date("d"),date("Y")));
+
+$content = nl2br($_POST['content']);
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':subject', $subject);

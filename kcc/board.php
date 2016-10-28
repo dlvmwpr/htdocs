@@ -157,10 +157,10 @@
                                                 <a href="write.php" class="sp_coms btn_write">글쓰기</a>
 					
                                             </div>
-					</div>	
-				</div>
+                                        </div>	
+                                </div>
                         </div>	
-		</div>	
+                    </div>
 	</div>
 	<!-- //container -->
 	<hr>

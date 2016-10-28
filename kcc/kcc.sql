@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- 생성 시간: 16-10-27 04:36
--- 서버 버전: 10.1.13-MariaDB
--- PHP 버전: 5.6.20
+-- 생성 시간: 16-10-28 04:38
+-- 서버 버전: 10.1.16-MariaDB
+-- PHP 버전: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -40,8 +40,7 @@ CREATE TABLE `board` (
 --
 
 INSERT INTO `board` (`idx`, `writer`, `subject`, `content`, `date`, `hits`) VALUES
-(3, 'aa', 'aa', 'aa', '0000-00-00', 0),
-(4, 'aaa', 'aaa', 'aaa', '0000-00-00', 0);
+(2, '작성자', '제목', '박근혜탄핵<br />\r\n박근혜하야<br />\r\n박근혜매도하라<br />\r\n최순실더러워<br />\r\n최순실아지매<br />\r\n최순실늘갱이<br />\r\n박근혜또한늘갱이<br />\r\n둘다늘갱이<br />\r\n결론은둘다늘갱이<br />\r\n결론은 헬조선<br />\r\n결론은 나라망했음<br />\r\n결론은 그 둘이 나라망쳤음<br />\r\n<br />\r\n- 서울디지텍고등학교 2학년 5반 13번 이민환 -', '2016-10-28', 999217);
 
 -- --------------------------------------------------------
 
@@ -53,7 +52,7 @@ CREATE TABLE `member` (
   `idx` int(11) NOT NULL,
   `kName` varchar(20) NOT NULL,
   `eName` varchar(20) DEFAULT NULL,
-  `birth` varchar(20) NOT NULL,
+  `birth` date NOT NULL,
   `id` varchar(30) NOT NULL,
   `pw` varchar(36) NOT NULL,
   `phone` varchar(14) DEFAULT NULL,
@@ -71,7 +70,7 @@ CREATE TABLE `member` (
   `officePhone` varchar(14) DEFAULT NULL,
   `faxNumber` varchar(14) DEFAULT NULL,
   `chkMarry` tinyint(1) DEFAULT NULL,
-  `weddingDay` varchar(20) DEFAULT NULL
+  `weddingDay` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -79,7 +78,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`idx`, `kName`, `eName`, `birth`, `id`, `pw`, `phone`, `cellphone`, `sms`, `email`, `housePostcode`, `houseAddress`, `DM`, `officeName`, `jobFamily`, `jobPosition`, `officePostcode`, `officeAddress`, `officePhone`, `faxNumber`, `chkMarry`, `weddingDay`) VALUES
-(1, 'dsdtg', '', 'dsdtg', 'jghhf', 'aaaas', '', '010-4354-6467', 0, '', '6027', '서울 강남구 압구정로 102 (신사동, 형지제2빌딩)2cmd', 0, 'sm', '', 'a/s', '7630', '서울 강서구 마곡중앙로 11 (내발산동, 공원관리사무실)a23', '', '', 1, '2011-06-05'),
+(1, 'dsdtg', '', '0000-00-00', 'jghhf', 'aaaas', '', '010-4354-6467', 0, '', '6027', '서울 강남구 압구정로 102 (신사동, 형지제2빌딩)2cmd', 0, 'sm', '', 'a/s', '7630', '서울 강서구 마곡중앙로 11 (내발산동, 공원관리사무실)a23', '', '', 1, '2011-06-05'),
 (2, '장숭리', '', '1999-03-07', 'sodas789', 'sodas789', '', '010-3334-5942', 0, '', '04934', '서울 광진구 긴고랑로15길 21 (중곡동, 파인빌15차)2층', 0, '서울디지텍고등학교', '', '2학년', '04346', '서울 용산구 회나무로12길 27 (이태원동, 서울디지텍고등학교)4층', '', '', 1, '2016-10-20');
 
 --
@@ -106,7 +105,7 @@ ALTER TABLE `member`
 -- 테이블의 AUTO_INCREMENT `board`
 --
 ALTER TABLE `board`
-  MODIFY `idx` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idx` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- 테이블의 AUTO_INCREMENT `member`
 --
