@@ -418,7 +418,7 @@ tr { display: table-row; vertical-align: inherit; border-color: inherit; }
 .sp_coms { display: inline-block; overflow: hidden; width: auto; height: 10px; background: url('../img/sp_com_sub.png') no-repeat; font-size: 0; line-height: 999px; vertical-align: top; }
 .btn_view { width: 94px; height: 34px; background-position: 0 -171px; font-size: 13px; color: #333; line-height: 34px; text-align: center; }
 .wrapBtnview { padding-top: 20px; text-align: right; }
-.wrapBtnwrite { padding-top: 20px; text-align: right; }
+.wrapBtnwrite { width:94px; padding-top: 20px; text-align: right; float:right; }
 .btn_write { width: 94px; height: 34px; background-position: 0 -209px; font-size: 13px; color: #333; line-height: 34px; text-align: center; color: #fff; }
 
 .not_wrt {  width: 100%; font-size:14px; margin-top: 30px; border-top: 3px solid #115fad; border-bottom: 3px solid #ccc; table-layout: fixed; }
@@ -430,3 +430,4 @@ tr { display: table-row; vertical-align: inherit; border-color: inherit; }
 .tb_biginp { width: 170px; }
 .write_caption { width: 40px; text-align: center; }
 .write_content { width:98.4%; height:500px; resize:none; float:left; overflow-y:scroll; overflow-x:no-content; padding:7px 7px; border:1px solid #cccccf; background:#ffffff;}
+.write_alert { font-size: 5px; }

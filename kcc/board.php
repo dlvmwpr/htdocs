@@ -140,6 +140,9 @@
                                                 <tbody>
                                                     <?php 
                                                         include "dbCon.php";
+                                                        //$page = $_REQUEST['pg'];
+                                                        //$toPage = 10*$page;
+                                                        //$fromPage = $toPage-10*($page-1);  LIMIT $fromPage,$toPage
                                                         $sql = "SELECT * FROM board order by idx DESC";
                                                         $stmt = $pdo->prepare($sql);
                                                         $stmt->execute();
@@ -153,9 +156,11 @@
                                                     ?>
                                                 </tbody>
                                             </table>
+                                            <div class="board_page">
+                                                
+                                            </div>
                                             <div class='wrapBtnwrite'>
                                                 <a href="write.php" class="sp_coms btn_write">글쓰기</a>
-					
                                             </div>
                                         </div>	
                                 </div>

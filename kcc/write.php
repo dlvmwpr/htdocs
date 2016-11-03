@@ -130,7 +130,7 @@
                                                 <h2 class="sp_subtit stit_notice">커뮤니티</h2>
                                                 <p class="join_txt">금강컨트리클럽을 이용하시기 불편함 없도록 밝고 건강한 새로운 소식을 회원님께 알려드립니다.</p>
                                         </div>	
-                                        <form id='writeBoard' action='post_board.php' method='post'>
+                                        <form id='writeBoard' action='post_board.php' method='post' enctype='multipart/form-data'>
                                             <div class="article_box">
                                                 <table class="not_wrt">
                                                     <caption> <span class="blind">공지사항 수정</span></caption>
@@ -142,6 +142,11 @@
                                                                 <textarea class='write_content' name='content'></textarea>
                                                             </td>
                                                         </tr>
+                                                        <tr> <th class='write_caption'> 첨부파일 </th>
+                                                            <td colspan='3'>
+                                                                <input id='fupload' type='file' name='upload' width='125px'>
+                                                                <span class='write_alert'>파일은 3MB까지만 업로드 가능합니다.</span>
+                                                            </td>
                                                     </tbody>
                                                 </table>
                                                 <div class='wrapBtnview'>
