@@ -430,4 +430,5 @@ tr { display: table-row; vertical-align: inherit; border-color: inherit; }
 .tb_biginp { width: 170px; }
 .write_caption { width: 40px; text-align: center; }
 .write_content { width:98.4%; height:500px; resize:none; float:left; overflow-y:scroll; overflow-x:no-content; padding:7px 7px; border:1px solid #cccccf; background:#ffffff;}
-.write_alert { font-size: 5px; }
+.write_alert { font-size: 5px; margin-left:10px;}
+#boardFile { padding : 13px 22px 14px 12px; }

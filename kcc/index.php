@@ -96,7 +96,7 @@ $(document).ready(function() {
                                     <li class="menu5">
                                         <a href="#" class="sp_com site_menu5">COMMUNITY 커뮤니티</a>
                                         <ul class="site_sub_menu">
-                                        <li><a href="#" class="sp_com site_menu5_1">공지사항</a></li>
+                                        <li><a href="board.php" class="sp_com site_menu5_1">공지사항</a></li>
                                         <li><a href="#" class="sp_com site_menu5_2">자료실</a></li>
                                         <li><a href="#" class="sp_com site_menu5_3">Joinroom</a></li>
                                         </ul>
@@ -164,26 +164,19 @@ $(document).ready(function() {
 					<col width="163"><col>
 					</colgroup>
 					<tbody>
-					<tr>
-					<td class="title"><a href="#">1~2월 동계휴장 및 그린피 안내1~2월 동계휴장 및 그린피 안내</a></td>
-					<td class="reg_date">13.12.18</td>
-					</tr>
-					<tr>
-					<td class="title"><a href="#">12월 티업시간 및 그린피 안내</a></td>
-					<td class="reg_date">13.11.14</td>
-					</tr>
-					<tr>
-					<td class="title"><a href="#">2014년 연단체팀 혜택 및 조건</a></td>
-					<td class="reg_date">13.11.05</td>
-					</tr>
-					<tr>
-					<td class="title"><a href="#">10월 21일 회원초청 친선골프</a></td>
-					<td class="reg_date">13.10.23</td>
-					</tr>
-					<tr>
-					<td class="title"><a href="#">11월 그린피 안내</a></td>
-					<td class="reg_date">13.10.26</td>
-					</tr>
+                                            <?php 
+                                                include "dbCon.php";
+                                                $sql = "SELECT * FROM board order by idx DESC LIMIT 0,5";
+                                                $stmt = $pdo->prepare($sql);
+                                                $stmt->execute();
+                                                foreach ($stmt as $row) {
+                                                    $idx = $row['idx'];
+                                                    $subject = $row['subject'];
+                                                    $date = $row['date'];
+                                                    $rtn = str_replace("-", ".", substr($date, 2, 8));
+                                                    echo "<tr><td class='title'><a href='view.php?idx=$idx'>$subject</a></td><td class='reg_date'>$rtn</td></tr>";
+                                                }
+                                            ?>
 					</tbody>
 					</table>					
 					<div class="notice_pg">

@@ -141,6 +141,7 @@
                                                     $subject = $row['subject'];
                                                     $content = $row['content'];
                                                     $writer = $row['writer'];
+                                                    $file = $row['originalFilename'];
                                                     echo "<script>$(document).ready(function() {"
                                                     . "$('#subject').val('$subject'); $('#writer').val('$writer'); $('#idx').val('$idx');"
                                                             . "});</script>";
@@ -154,6 +155,11 @@
                                                         <tr> <th class='write_caption'> 내용 </th>
                                                             <td colspan='3'>
                                                                 <textarea class='write_content' id="txtContent" name='content'><?=strip_tags($row['content'])?></textarea>
+                                                            </td>
+                                                        </tr>
+                                                        <tr> <th class='write_caption'> 첨부파일 </th>
+                                                            <td id='boardFile' colspan='3'>
+                                                                <?=$file?> <span class='write_alert'>파일은 수정이나 삭제가 불가능합니다.</span>
                                                             </td>
                                                         </tr>
                                                     </tbody>

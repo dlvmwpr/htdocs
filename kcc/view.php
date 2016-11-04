@@ -135,7 +135,7 @@
                                                 <caption> <span class="blind">공지사항 안내</span></caption>
                                                     <?php 
                                                         include "dbCon.php";
-                                                        $idx = $_REQUEST['idx'];
+                                                        $idx = $_GET['idx'];
                                                         $sql = "SELECT * FROM board WHERE idx=$idx";
                                                         $stmt = $pdo->prepare($sql);
                                                         $stmt->execute();
@@ -143,6 +143,7 @@
                                                         $subject = $row['subject'];
                                                         $content = $row['content'];
                                                         $date = $row['date'];
+                                                        $filename = $row['originalFilename'];
                                                                                                                 
                                                         // 조회수 증가
                                                         $hits = $row['hits'];
@@ -153,6 +154,7 @@
                                                         
                                                         echo "<thead><tr> <th> $subject </th> <th class='hits'> <span class='hits'>조회수 $hitsup</class></th></thead>"
                                                         . "<tbody><tr><td class='view_con' colspan=2>$content</td></tr>";
+                                                        if ($filename)  echo "<tr><td id='boardFile' colspan='2'> 첨부파일 : <a href='fileDown.php?idx=$idx'>$filename</a> </td> </tr>";
                                                     ?>
                                                 </tbody>
                                             </table>

@@ -2,7 +2,7 @@
 $db_user = "root";
 $db_pass = "";
 $db_host = "localhost";
-$db_name = "test1";
+$db_name = "test1104";
 $db_type = "mysql";
 $db = "$db_type:host=$db_host;dbname=$db_name;charset=utf8";
 

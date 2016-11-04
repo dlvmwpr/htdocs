@@ -147,6 +147,7 @@
                                                                 <input id='fupload' type='file' name='upload' width='125px'>
                                                                 <span class='write_alert'>파일은 3MB까지만 업로드 가능합니다.</span>
                                                             </td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                                 <div class='wrapBtnview'>
