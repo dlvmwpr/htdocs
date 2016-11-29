@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -114,7 +114,7 @@
 				<div class="left_con">
                                     <h2 class="nav_tit"><span class="sp_subtit com_tit">커뮤니티</span></h2>
 					<ul class="lnb">
-                                        <li><a href="#" class="selected_hard">공지사항<span class="sp_sub select_ico"></span></a></li>
+                                        <li><a href="board.php" class="selected_hard">공지사항<span class="sp_sub select_ico"></span></a></li>
 					<li><a href="#">자료실<span class="sp_sub select_ico"></span></a></li>
 					</ul> 
 				</div>		

@@ -1,0 +1,4 @@
+@import "../fonts/NanumSquare.css";
+*{font-family:'NanumSquare'; margin:0; padding:0;}
+wrap { width:500px; height:auto; margin:0 auto; }
+#Address { height:40px; width:450px; font-size:15px; }

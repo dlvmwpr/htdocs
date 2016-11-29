@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <script src="js/jquery-3.0.0.js" type="text/javascript"></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <title></title>
+        <script>
+            /*$(document).ready(function() {
+                
+                $.ajax({
+                        url:$url,
+                        type:'GET',
+                        data:$('form').serialize(),
+                        datatype:'xml',
+                        success:function(response){
+                        console.log(response);
+                        }
+                    });
+                
+            */
+            $url = 'getJuso.php';
+        $(document).ready(function() {
+            $("#btnget").click(function() {
+                $.ajax({
+                    url:$url,
+                    type:'GET',
+                    data:$('form').serialize(),
+                    datatype:'xml',
+                    success:function(response){
+                    console.log(response);
+                    }
+                });
+            });
+            });
+            /*$('#raw_Addr').on('keypress',function(e) {
+                var keyWord = $('#raw_Addr').val();
+                if (e.which === 13) { 
+                    $.ajax({
+                        type:'GET',
+                        url:'getJuso.php',
+                        dataType:'xml',
+                        data:$('form').serialize,
+                        success:function(getData){
+                            console.log(getData);
+                        }
+                    }); 
+                }
+            });*/ 
+
+        </script>
+    </head>
+    <body>
+    <header>도로명 주소 변환</header>
+    <content>
+        <form>
+            <select name="raw_Opti" id="raw_Opti">
+                <option value="road">도로명</option>
+                <option value="dong">동/읍/면</option>
+                <option value="post">우편번호</option>
+            </select>
+            <input type="text" id="raw_Addr" name="raw_Addr" placeholder="주소를 입력해주세요."/>
+            <button id="btnget">Submit</button>
+        </form>
+        <div id="result">
+            
+        </div>
+    </content>
+    </body>
+</html>
