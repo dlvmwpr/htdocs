@@ -26,7 +26,6 @@ $birthMonth = $_POST['birthMonth'];
 $birthDay = $_POST['birthDay'];
 $id = $_POST['userid'];
 $password = $_POST['password'];
-$chkPassword = $_POST['confirm_password'];
 $phoneGroup = $_POST['phoneGroup'];
 $phoneSecond = $_POST['phoneSecond'];
 $phoneThird = $_POST['phoneThird'];
@@ -93,5 +92,5 @@ $stmt->bindValue(':weddingDay', $r_Marry);
 
 $stmt->execute();
 
-echo "<meta http-equiv='refresh' content='0; url=sub3.php' >";
+//echo "<meta http-equiv='refresh' content='0; url=sub3.php' >";
 ?>

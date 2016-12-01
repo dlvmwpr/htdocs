@@ -1,0 +1,17 @@
+@import "../fonts/NanumSquare.css";
+*{font-family:'NanumSquare'; margin:0; padding:0;}
+h1 { font-size:50px; }
+body { background-color:#444; }
+#wrap { width:900px; height:707px; margin:0 auto; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);background:url(../img/background.png) no-repeat 0 0; }
+header { width:900px; text-align:center; margin-top:100px; color:white; }
+#finder { width:700px; height:150px; margin:30px auto; margin-bottom:0px; }
+#frmFinder { width: 640px; float:left; margin-right:10px; }
+#inpAddr { height:40px; width:518px; font-size:15px; padding-left:8px; }
+#optionWrap { float:left; width:100px; height:44px; margin-right:10px;font-weight:bold; }
+.btn { color: black; font-weight:bold; text-align: center; vertical-align: middle; text-decoration: none; display: inline-block; font-size: 16px; background:white; border:0 none; border:1px solid #cccccf; }
+#search { float:left; width:50px; height:44px; }
+#content { width:700px; height:300px; margin:0 auto; background-color:transparent; color:white; z-index:-1; }
+#map { width:750px; height:400px; margin:0 auto; border:5px solid white; z-index:-99; }
+.hide { display:none; }
+#results { width:100%; text-align:center; }
+tr { width:100%; }
