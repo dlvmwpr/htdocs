@@ -1,17 +1,28 @@
 @import "../fonts/NanumSquare.css";
 *{font-family:'NanumSquare'; margin:0; padding:0;}
+a:hover,a:link,a:visited { text-decoration:none; color:white; }
 h1 { font-size:50px; }
 body { background-color:#444; }
-#wrap { width:900px; height:707px; margin:0 auto; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);background:url(../img/background.png) no-repeat 0 0; }
+#wrap { width:900px; height:707px; margin:0 auto; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:url(../img/background.png) no-repeat 0 0; }
 header { width:900px; text-align:center; margin-top:100px; color:white; }
-#finder { width:700px; height:150px; margin:30px auto; margin-bottom:0px; }
+#finder { width:700px; height:60px; margin:30px auto; margin-bottom:60px; }
 #frmFinder { width: 640px; float:left; margin-right:10px; }
 #inpAddr { height:40px; width:518px; font-size:15px; padding-left:8px; }
 #optionWrap { float:left; width:100px; height:44px; margin-right:10px;font-weight:bold; }
 .btn { color: black; font-weight:bold; text-align: center; vertical-align: middle; text-decoration: none; display: inline-block; font-size: 16px; background:white; border:0 none; border:1px solid #cccccf; }
 #search { float:left; width:50px; height:44px; }
 #content { width:700px; height:300px; margin:0 auto; background-color:transparent; color:white; z-index:-1; }
-#map { width:750px; height:400px; margin:0 auto; border:5px solid white; z-index:-99; }
-.hide { display:none; }
+#map { position:absolute; width:740px; height:380px; margin:0 auto; border:5px solid white; }
+.hideMap { display:none !important; }
 #results { width:100%; text-align:center; }
 tr { width:100%; }
+#overlay { width:750px; height:380px; margin:0 auto; position:absolute; top:68%; left:50%; transform: translate(-50%,-50%);}
+#closeMap { width:50px; height:50px; display:block; position:absolute; z-index: 999; right:0;}
+
+
+
+.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: #d95050 url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
+.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}

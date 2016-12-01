@@ -5,19 +5,17 @@
     <title>Document</title>
     <script src="js/jquery-3.0.0.js"></script>
     <script src="js/jquery.selectric.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=7af5b5b7fa39634559a90aca038290b4&libraries=services"></script>
     <style>
-        .customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
-        .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
-        .customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: #d95050 url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
-        .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
-        .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+        
     </style>
     <script>
         $(document).ready(function(){
             $('#raw_Opti').selectric();
 
             var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+            
             $("#search").click(function(){
                 var url='getJuso.php';
 
@@ -33,12 +31,16 @@
                 });
             });
         });
+        
+        /*지도보기 관련 함수*/
         function toMap(param) {
             var MapAddr = param;
             
+            $("#overlay").removeClass('hideMap');
+            
             var mapContainer = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
             var mapOption = { //지도를 생성할 때 필요한 기본 옵션
-                center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+                center: new daum.maps.LatLng(37.538909,126.990613), //지도의 중심좌표.
                 level: 3 //지도의 레벨(확대, 축소 정도)
             };
             
@@ -50,26 +52,11 @@
 
                 // 정상적으로 검색이 완료됐으면 
                  if (status === daum.maps.services.Status.OK) {
-
                     var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
-
-                    var imageSrc = './img/marker_img.png', // 마커이미지의 주소입니다    
-                        imageSize = new daum.maps.Size(50, 50), // 마커이미지의 크기입니다
-                        imageOprion = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-                    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-                    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOprion),
-                        markerPosition = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng); // 마커가 표시될 위치입니다
-
-                    // 마커를 생성합니다
-                    var marker = new daum.maps.Marker({
-                        position: markerPosition,
-                        image: markerImage // 마커이미지 설정 
-                    });
                      
                     var content = '<div class="customoverlay">' +
                                 '   <a href="http://map.daum.net/?q=' + MapAddr + '" target="_blank">' +
-                                '    <span class="title">선택한 장소</span>' +
+                                '    <span class="title">'+ MapAddr +'</span>' +
                                 '  </a>' +
                                 '</div>';
                      
@@ -83,20 +70,15 @@
                         yAnchor: 1 
                     });
 
-                    // 인포윈도우로 장소에 대한 설명을 표시합니다
-                    /*var infowindow = new daum.maps.InfoWindow({
-                        content: '<div style="width:150px;text-align:center;padding:6px 0;">선택한 장소</div>'
-                    });
-                    infowindow.open(map, marker);*/
-
                     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                     map.setCenter(coords);
                     map.setZoomable(false);    
                     map.setDraggable(false);
-                     
-                    $("#map").css("z-index",999);
                 } 
             });
+        }
+        function closeMap(){
+            $("#overlay").addClass('hideMap');
         }
     </script>
     
@@ -120,6 +102,10 @@
             </form>
             <button type="button" class="btn" id="search">검색</button>
         </div>
+        <div id="overlay" class="hideMap">
+            <div id="map"></div>
+            <a href="#" id="closeMap" onclick="closeMap()"><img src="img/closeBtn.jpg" alt=""></a>
+        </div>
         <div id="content">
             <table id="results">
                 <colgroup><col width=40px><col width=70px><col><col width=70px></colgroup>
@@ -132,8 +118,9 @@
                     <tr><td>1</td><td>03302</td><td><span class="varMapAddr">서울특별시 은평구 진관4로 37</span></td><td class="showMap"><a href="#" onclick="toMap($(this).parent().parent().find('.varMapAddr').text())">지도 보기</a></td></tr>
                 </tbody>
             </table>
+            
         </div>
-        <div id="map"></div>
+        
     </div>
 </body>
 </html>
