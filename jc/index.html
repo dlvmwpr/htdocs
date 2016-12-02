@@ -2,40 +2,103 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>20522 최지혁</title>
     <script src="js/jquery-3.0.0.js"></script>
     <script src="js/jquery.selectric.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=7af5b5b7fa39634559a90aca038290b4&libraries=services"></script>
-    <style>
-        
-    </style>
+    <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+
     <script>
+        var mapFlag = false;
         $(document).ready(function(){
             $('#raw_Opti').selectric();
-
-            var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+            $('#inpAddr').empty();
+            $("#overlay").addClass('hideMap');
+            
+            $("#content").mCustomScrollbar({
+                axis:"y",
+                mouseWheelPixels: 300,
+                theme:"light-2"
+            });
+            
+            var mapContainer = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+            var mapOption = { //지도를 생성할 때 필요한 기본 옵션
+                center: new daum.maps.LatLng(37.538909,126.990613), //지도의 중심좌표.
+                level: 3 //지도의 레벨(확대, 축소 정도)
+            };
+            var map = new daum.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
             
             $("#search").click(function(){
+                if ( mapFlag == true ) { $('#overlay').addClass('hideMap'); }
                 var url='getJuso.php';
-
-                $('#Address').empty();
+                
                 $.ajax({
-                    url:url,
+                    url:'getJuso.php',
                     datatype:'xml',
                     type:'get',
-                    data:$('form').serialize(),
+                    data:$('form').serialize() + "&pageNum=1",
                     success:function(response){
                     console.log(response);
+                    $("#results tbody").empty();
+                    if ($(response).find('totalCount').text() == "") {
+                        var addText = "<tr><td height=40px colspan='4'>검색결과가 없습니다.</td></tr>";
+
+                        $("#results tbody").append(addText);
+                    } else { 
+                        $(response).find('newAddressListAreaCd').each(function(i) {
+                                var zipCode = $(this).find('zipNo').text();
+                                var roadAddr = $(this).find('lnmAdres').text();
+                                var dongAddr = $(this).find('rnAdres').text();
+                                var funcText = "toMap($(this).parent().parent().find('.varMapAddr').text())";
+                                var addText = "<tr><td rowspan='2'>" + (i+1) + "</td><td rowspan='2'>" + zipCode + "</td>"
+                                +             "<td><span class='varMapAddr'>" + roadAddr + "</span></td>"
+                                +             "<td rowspan='2' class='showMap'><a href='#' onclick=" + funcText + ">지도 보기</a></td></tr>"
+                                +             "<tr><td class='dong'>" + dongAddr + "</td></tr>";
+
+                                $("#results tbody").append(addText);
+
+                            });
+                        }
+                    /*
+                    var totalPage = $(response).find('totalPage').text();
+                    if (totalPage > 1) {
+                        var numOfrow = 10;
+                            for ( var i=1 ; i<=totalPage ; i++ ) {
+                                var rowCount = numOfrow*(i-1);
+                            $.ajax({
+                                url:'getJuso.php',
+                                datatype:'xml',
+                                type:'get',
+                                data:$('form').serialize() + "&pageNum=" + i,
+                                success:function(response){
+                                    console.log(response);
+                                    $(response).find('newAddressListAreaCd').each(function(i) {
+                                        var zipCode = $(this).find('zipNo').text();
+                                        var roadAddr = $(this).find('lnmAdres').text();
+                                        var dongAddr = $(this).find('rnAdres').text();
+                                        var funcText = "toMap($(this).parent().parent().find('.varMapAddr').text())";
+                                        var aNum = $(this).find('')
+                                        var addText = "<tr><td rowspan='2'>" + (rowCount + i + 1) + "</td><td rowspan='2'>" + zipCode + "</td>"
+                                        +             "<td><span class='varMapAddr'>" + roadAddr + "</span></td>"
+                                        +             "<td rowspan='2' class='showMap'><a href='#' onclick=" + funcText + ">지도 보기</a></td></tr>"
+                                        +             "<tr><td class='dong'>" + dongAddr + "</td></tr>";
+
+                                        $("#results tbody").append(addText);
+
+                                    });
+                                }
+                            });
+                        }
+                  }*/
                     }
                 });
             });
         });
-        
         /*지도보기 관련 함수*/
         function toMap(param) {
             var MapAddr = param;
-            
+            mapFlag = true;
             $("#overlay").removeClass('hideMap');
             
             var mapContainer = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -78,6 +141,7 @@
             });
         }
         function closeMap(){
+            mapFlag = false;
             $("#overlay").addClass('hideMap');
         }
     </script>
@@ -85,6 +149,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/selectric.css">
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
  </head>
 <body>
     <div id="wrap">
@@ -102,7 +167,7 @@
             </form>
             <button type="button" class="btn" id="search">검색</button>
         </div>
-        <div id="overlay" class="hideMap">
+        <div id="overlay">
             <div id="map"></div>
             <a href="#" id="closeMap" onclick="closeMap()"><img src="img/closeBtn.jpg" alt=""></a>
         </div>
@@ -115,7 +180,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>1</td><td>03302</td><td><span class="varMapAddr">서울특별시 은평구 진관4로 37</span></td><td class="showMap"><a href="#" onclick="toMap($(this).parent().parent().find('.varMapAddr').text())">지도 보기</a></td></tr>
+                    
+                    
+                    
                 </tbody>
             </table>
             
